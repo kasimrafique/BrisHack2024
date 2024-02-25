@@ -16,7 +16,7 @@ export type Score = {
     "final_score": number | null
 }
 
-async function score(lad: string): Promise<Score | null> {
+export async function getScore(lad: string): Promise<Score | null> {
     const supabase = createClient();
 
     const { data, error }: {
