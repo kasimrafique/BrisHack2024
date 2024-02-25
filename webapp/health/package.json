@@ -14,14 +14,17 @@
     "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.39.7",
     "next": "14.1.0",
+    "plotly.js": "^2.29.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-plotly.js": "^2.6.0"
   },
   "devDependencies": {
     "@testing-library/react": "^14.2.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-plotly.js": "^2.6.3",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",

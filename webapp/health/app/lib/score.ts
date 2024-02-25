@@ -59,6 +59,7 @@ async function score(lad: string): Promise<Score | null> {
             continue;
         }
 
+        // @ts-ignore
         const z = (data[key] - england_2020[key]) / standard_deviations[key];
         if (key in ["life_satisfaction", "healthy_eating", "physical_activity", "green_space"]) {
             score += z;

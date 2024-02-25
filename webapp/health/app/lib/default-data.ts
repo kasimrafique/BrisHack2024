@@ -23,3 +23,13 @@ export const standard_deviations = {
     "noise_complaints": 9.7658,
     "road_safety": 9.8203
 };
+
+export const Keys : string[] = [
+    "Life Satisfaction",
+    "Healthy Eating",
+    "Physical Activity",
+    "Green Space",
+    "Air Pollution",
+    "Noise Complaints",
+    "Road Safety"
+  ]
