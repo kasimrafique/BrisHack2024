@@ -36,3 +36,17 @@ export const createClient = () => {
 };
 
 export const supabase = createClient();
+
+export type Data = {
+    "life_satisfaction": number | null
+    "healthy_eating": number | null
+    "physical_activity": number | null
+    "green_space": number | null
+    "gp_distance": number | null
+    "pharmacy_distance": number | null
+    "sport_facility_distance": number | null
+    "air_pollution": number | null
+    "noise_complaints": number | null
+    "road_safety": number | null,
+}
+
