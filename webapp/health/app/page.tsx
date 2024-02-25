@@ -22,9 +22,11 @@ export default function Home() {
             const lad = await getLAD(postcode);
             console.log(lad);
             setData(await yearlyLADValues(lad));
+            
         }
     }
-
+    
+    const plots = data && PlotGraphs({data});
     return (
         <div className="bg-white fill-slate-400">
             <div className={`flex justify-center bg-dark-green text-5xl text-white py-20 ${montserrat.className}`}> 
@@ -41,28 +43,29 @@ export default function Home() {
                 </form>
                 <div className="flex justify-left text-sm text-light-green"></div> 
 
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 my-2 ml-4 ${montserrat.className}`}> 
+                <div className={`flex justify-left text-3xl font-semi-bold text-lilac py-2 my-2 ml-4 ${montserrat.className}`}> 
                 Summary</div>
                 <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                Life Satisfaction
+                <i>Life Satisfaction</i>
 
                 
 
 
                 </div>
 
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 pr-2 ml-4 ${montserrat.className}`}> Graphs</div>
-                {data && <PlotGraphs data={data} />}
+                <div className={`flex justify-left text-3xl font-semi-bold text-lilac py-4 ml-4  ${montserrat.className}`}> Graphs</div>
+                <div className="border border-black scale-75">{plots && plots[0]}</div>
+                <div className="border border-blue-600">{plots && plots[1]}</div>
+
+                {/* <div>{data && <PlotGraphs data={data}/>}</div> */}
             </div>
             
         </div>
     );
 }
 
-
 function PlotGraphs({ data } : { data : (number | null)[][]}) {
-    return <>
-        {data?.map((r, i) => {
+    return data?.map((r, i) => {
             return <Plot
             data={[
             {
@@ -70,11 +73,10 @@ function PlotGraphs({ data } : { data : (number | null)[][]}) {
                 y: r,
                 type: 'scatter',
                 mode: 'lines',
-                marker: {color: 'red'},
+                marker: {color: 'purple'},
             },
             ]}
             layout={ {title: Keys[i]} }
             />
-        })}
-    </>;
+        });
 }
