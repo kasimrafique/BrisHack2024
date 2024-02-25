@@ -1,5 +1,5 @@
 import { Data, createClient } from "./server-client";
-import { england_2020 } from "./default-data";
+import { england_data} from "./default-data";
 import { standard_deviations } from "./default-data";
 
 export type Score = {
@@ -54,15 +54,27 @@ export async function getScore(lad: string, year : number): Promise<Score | null
     };
     let final_score = 0;
     let n = 0;
-    for (const key_t in Object.keys(england_2020)) {
-        const key: keyof typeof england_2020 = key_t as keyof typeof england_2020;
+    
+    var england;
+
+    for (const key_eng in england_data){
+        if (year.toString() === key_eng){
+            const key = parseInt(key_eng) as keyof typeof england_data;
+            england = england_data[key];
+        }
+    }
+
+
+
+    for (const key_t in Object.keys(england!)) {
+        const key: keyof Data = key_t as keyof Data;
         let score = 4;
         if (data[key] === null) {
             continue;
         }
 
         // @ts-ignore
-        const z = (data[key] - england_2020[key]) / standard_deviations[key];
+        const z = (data[key] - england[key]) / standard_deviations[key];
         if (key in ["life_satisfaction", "healthy_eating", "physical_activity", "green_space"]) {
             score += z;
         } else {
