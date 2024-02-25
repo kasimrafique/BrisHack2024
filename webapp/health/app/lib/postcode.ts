@@ -1,29 +1,44 @@
-import { equal } from "assert";
-import { createClient, supabase } from "./server-client";
+"use server";
+
+import { createClient } from "./server-client";
+
 
 export async function getLAD(postcode: string) {
-    const start = postcode.trim().replace(/\s/g, "");
-    const { row, error } = await supabase
-        .from("postcodes")
-        .eq("postcode", start)
-        .select("LAD");
+    const supabase = createClient();
+    const start = postcode.trim().replace(/\s/g, "").toUpperCase();
 
-    if (row.length == 0) {
-        getNearestLAD(start);
+    const { data, error } = await supabase
+        .from("postcodes")
+        .select("LAD")
+        .eq("postcode", start)
+
+    if (error !== null) {
+        console.log(error);
+        // Handle error
     }
 
-    return row[0].LAD;
+    if (data === null) {
+        return getNearestLAD(start);
+    }
+
+    return data[0].LAD;
 }
 
 async function getNearestLAD(postcode: string) {
+    const supabase = createClient();
     const start = postcode.slice(0, -3);
 
     const { data, error } = await supabase
         .from("postcodes")
-        .like("postcode", start + "%")
         .select("LAD")
-    
-    if (data.length === 0) {
+        .like("postcode", start + "%")
+
+    if (error !== null) {
+        console.log(error);
+        // Handle error
+    }
+
+    if (data === null) {
         return null;
     }
 
