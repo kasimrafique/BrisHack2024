@@ -35,7 +35,7 @@ export default function Home() {
 
 
             <div className="">
-                <div className="flex justify-left text-xl text-light-green mx-4 my-2"> Enter your postcode here:</div>
+                <div className="flex justify-left text-xl text-dark-green mx-4 my-2"> Enter your postcode here:</div>
                 
                 <form action={action}>
                         <input type="text" name="postcode" className="mx-8 my-2 text-black rounded-[7px] border border-dark-green" placeholder="  Enter postcode" />
@@ -55,8 +55,10 @@ export default function Home() {
 
                 <div className={`flex justify-left text-3xl font-semi-bold text-lilac py-4 ml-4  ${montserrat.className}`}> Graphs</div>
                 <div className="border border-black scale-75">{plots && plots[0]}</div>
-                <div className="border border-blue-600">{plots && plots[1]}</div>
-
+                <div className="border border-blue-600 scale-75">{plots && plots[1]}</div>
+                <div className="border border-black scale-75">{plots && plots[2]}</div>
+                <div className="border border-blue-600 scale-75">{plots && plots[3]}</div>
+                <div className="border border-black scale-75">{plots && plots[4]}</div>
                 {/* <div>{data && <PlotGraphs data={data}/>}</div> */}
             </div>
             
