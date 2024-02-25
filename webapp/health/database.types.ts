@@ -9,6 +9,57 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      data: {
+        Row: {
+          air_pollution: number | null
+          area_code: string
+          area_name: string | null
+          area_type: string | null
+          gp_distance: number | null
+          green_space: number | null
+          healthy_eating: number | null
+          life_satisfaction: number | null
+          noise_complaints: number | null
+          pharmacy_distance: number | null
+          physical_activity: number | null
+          road_safety: number | null
+          sport_facility_distance: number | null
+          year: number
+        }
+        Insert: {
+          air_pollution?: number | null
+          area_code: string
+          area_name?: string | null
+          area_type?: string | null
+          gp_distance?: number | null
+          green_space?: number | null
+          healthy_eating?: number | null
+          life_satisfaction?: number | null
+          noise_complaints?: number | null
+          pharmacy_distance?: number | null
+          physical_activity?: number | null
+          road_safety?: number | null
+          sport_facility_distance?: number | null
+          year: number
+        }
+        Update: {
+          air_pollution?: number | null
+          area_code?: string
+          area_name?: string | null
+          area_type?: string | null
+          gp_distance?: number | null
+          green_space?: number | null
+          healthy_eating?: number | null
+          life_satisfaction?: number | null
+          noise_complaints?: number | null
+          pharmacy_distance?: number | null
+          physical_activity?: number | null
+          road_safety?: number | null
+          sport_facility_distance?: number | null
+          year?: number
+        }
+        Relationships: []
+      }
       postcodes: {
         Row: {
           LAD: string
@@ -118,4 +169,4 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
   ? Database["public"]["Enums"][PublicEnumNameOrOptions]
-    : never
+  : never
