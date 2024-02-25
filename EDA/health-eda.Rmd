@@ -1,0 +1,13 @@
+---
+title: "data-eda"
+output: html_document
+date: "2024-02-25"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+read.csv("data.csv", skip=2)
+```
