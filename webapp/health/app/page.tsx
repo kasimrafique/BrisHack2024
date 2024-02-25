@@ -34,7 +34,7 @@ export default function Home() {
                     <button type="submit" className="text-black">Submit</button>
                 </form>
         
-                {lad !== "" && <p className="text-black">Your LAD code is : {lad}</p>}
+                {lad !== "" && <p className="text-black my=3 ml=3">Your LAD code is : {lad}</p>}
                 <div className="flex justify-left text-sm text-light-green"></div> 
                 <Thing />
 
@@ -42,7 +42,7 @@ export default function Home() {
                 Summary
                 <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-20 ${montserrat.className}`}>
                     Life Satisfaction
-                    
+
                 </div>
 
 
