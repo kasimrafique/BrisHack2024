@@ -16,7 +16,7 @@ export type Score = {
     "final_score": number | null
 }
 
-export async function getScore(lad: string): Promise<Score | null> {
+export async function getScore(lad: string, year : number): Promise<Score | null> {
     const supabase = createClient();
 
     const { data, error }: {
@@ -26,11 +26,13 @@ export async function getScore(lad: string): Promise<Score | null> {
         .from("data")
         .select("area_name, area_type, life_satisfaction, healthy_eating, physical_activity, green_space, gp_distance, pharmacy_distance, sport_facility_distance, air_pollution, noise_complaints, road_safety")
         .eq("LAD", lad)
+        .eq("year", year)
         .single();
 
     if (error !== null) {
         console.log(error);
         // Handle error
+        return null;
     }
 
     if (data === null) {
