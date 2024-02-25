@@ -15,6 +15,7 @@ export async function getLAD(postcode: string) {
     if (error !== null) {
         console.log(error);
         // Handle error
+        return null;
     }
 
     if (data === null) {
