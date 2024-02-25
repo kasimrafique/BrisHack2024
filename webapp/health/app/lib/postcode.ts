@@ -18,7 +18,7 @@ export async function getLAD(postcode: string) {
         return null;
     }
 
-    if (data === null) {
+    if (data.length === 0) {
         return getNearestLAD(start);
     }
 

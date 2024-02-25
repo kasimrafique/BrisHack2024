@@ -20,37 +20,38 @@ export default function Home() {
         const postcode = x.get("postcode");
         if (typeof postcode === "string") {
             const lad = await getLAD(postcode);
+            console.log(lad);
             setData(await yearlyLADValues(lad));
         }
     }
 
     return (
-        <div className="bg-white">
+        <div className="bg-white fill-slate-400">
             <div className={`flex justify-center bg-dark-green text-5xl text-white py-20 ${montserrat.className}`}> 
                 <p>How Healthy is your Postcode?</p>
             </div>  
 
 
             <div className="">
-                <div className="flex justify-left text-xl text-light-green mx-2 my-2"> Enter your postcode here:</div>
+                <div className="flex justify-left text-xl text-light-green mx-4 my-2"> Enter your postcode here:</div>
                 
                 <form action={action}>
-                        <input type="text" name="postcode" className="mx-6 my-2 text-black rounded-[7px] border border-dark-green" placeholder="  Enter postcode" />
+                        <input type="text" name="postcode" className="mx-8 my-2 text-black rounded-[7px] border border-dark-green" placeholder="  Enter postcode" />
                     <button type="submit" className="text-black">Submit</button>
                 </form>
                 <div className="flex justify-left text-sm text-light-green"></div> 
 
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-20 ${montserrat.className}`}> 
-                Summary
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-20 ${montserrat.className}`}>
-                    Life Satisfaction
+                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 my-2 ml-4 ${montserrat.className}`}> 
+                Summary</div>
+                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
+                Life Satisfaction
+
+                
+
 
                 </div>
 
-
-                </div>
-
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-20 ${montserrat.className}`}> Graphs</div>
+                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 pr-2 ml-4 ${montserrat.className}`}> Graphs</div>
                 {data && <PlotGraphs data={data} />}
             </div>
             
