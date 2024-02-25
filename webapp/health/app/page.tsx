@@ -14,14 +14,17 @@ import dynamic from "next/dynamic";
 
 export default function Home() {
     const [postcode, setPostcode] = useState("");
-    const [data, setData] = useState<(number | null)[][]>();
+    const [ladVals, setLadVals] = useState<(number | null)[][]>();
+    const [engVals, setEngVals] = useState<(number | null)[][]>();
+
 
     const action = async (x : FormData) => {
         const postcode = x.get("postcode");
         if (typeof postcode === "string") {
             const lad = await getLAD(postcode);
-            console.log(lad);
-            setData(await yearlyLADValues(lad));
+            setLadVals(await yearlyLADValues(lad));
+            setEngVals(await yearlyEngValues());
+
         }
     }
 
@@ -52,7 +55,7 @@ export default function Home() {
                 </div>
 
                 <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 pr-2 ml-4 ${montserrat.className}`}> Graphs</div>
-                {data && <PlotGraphs data={data} />}
+                {ladVals && engVals && PlotGraphs({ ladVals, engVals })}
             </div>
             
         </div>
@@ -60,9 +63,8 @@ export default function Home() {
 }
 
 
-function PlotGraphs({ data } : { data : (number | null)[][]}) {
-    return <>
-        {data?.map((r, i) => {
+function PlotGraphs({ ladVals, engVals  } : { ladVals : (number | null)[][], engVals : (number | null)[][]}) {
+    return ladVals?.map((r, i) => {
             return <Plot
             data={[
             {
@@ -72,9 +74,16 @@ function PlotGraphs({ data } : { data : (number | null)[][]}) {
                 mode: 'lines',
                 marker: {color: 'red'},
             },
+            {
+                x: [2015, 2016, 2017, 2018, 2019, 2020],
+                y: engVals[i],
+                type: 'scatter',
+                mode: 'lines',
+                marker: {color: 'blue'},
+            }
             ]}
             layout={ {title: Keys[i]} }
+            config={ {'staticPlot': true} }
             />
-        })}
-    </>;
+    });
 }
