@@ -90,19 +90,6 @@ export const england_data = {
     2020 : england_2020
 }
 
-export const standard_deviations = {
-    "life_satisfaction": 11.5855,
-    "healthy_eating": 10.1449,
-    "physical_activity": 11.6036,
-    "green_space": 8.603,
-    "gp_distance": 10.4979,
-    "pharmacy_distance": 9.5098,
-    "sport_facility_distance": 10.0357,
-    "air_pollution": 9.3945,
-    "noise_complaints": 9.7658,
-    "road_safety": 9.8203
-};
-
 export const Keys: string[] = [
     "Life Satisfaction",
     "Healthy Eating",
@@ -111,4 +98,85 @@ export const Keys: string[] = [
     "Air Pollution",
     "Noise Complaints",
     "Road Safety"
+]
+
+export const standard_deviations = [
+    {
+        "year": 2015,
+        "life_satisfaction": 10.3106,
+        "healthy_eating": 9.8802,
+        "physical_activity": 9.6753,
+        "green_space": 8.6016,
+        "gp_distance": 10.3484,
+        "pharmacy_distance": 9.5672,
+        "sport_facility_distance": 10.1438,
+        "air_pollution": 9.4486,
+        "noise_complaints": 9.1127,
+        "road_safety": 9.4775
+    },
+    {
+        "year": 2016,
+        "life_satisfaction": 9.7558,
+        "healthy_eating": 9.8804,
+        "physical_activity": 9.6749,
+        "green_space": 8.6015,
+        "gp_distance": 10.3865,
+        "pharmacy_distance": 9.5685,
+        "sport_facility_distance": 10.1228,
+        "air_pollution": 11.8897,
+        "noise_complaints": 9.0471,
+        "road_safety": 9.4892
+    },
+    {
+        "year": 2017,
+        "life_satisfaction": 9.8004,
+        "healthy_eating": 9.7739,
+        "physical_activity": 10.2841,
+        "green_space": 8.6015,
+        "gp_distance": 10.4282,
+        "pharmacy_distance": 9.5673,
+        "sport_facility_distance": 10.0882,
+        "air_pollution": 13.0658,
+        "noise_complaints": 9.1724,
+        "road_safety": 9.7175
+    },
+    {
+        "year": 2018,
+        "life_satisfaction": 10.1304,
+        "healthy_eating": 10.4171,
+        "physical_activity": 10.6372,
+        "green_space": 8.6019,
+        "gp_distance": 10.4205,
+        "pharmacy_distance": 9.5393,
+        "sport_facility_distance": 10.0375,
+        "air_pollution": 12.9352,
+        "noise_complaints": 9.4793,
+        "road_safety": 9.759
+    },
+    {
+        "year": 2019,
+        "life_satisfaction": 9.8352,
+        "healthy_eating": 10.8037,
+        "physical_activity": 11.0193,
+        "green_space": 8.6025,
+        "gp_distance": 10.497,
+        "pharmacy_distance": 9.5094,
+        "sport_facility_distance": 10.0348,
+        "air_pollution": 11.8233,
+        "noise_complaints": 9.7657,
+        "road_safety": 9.8417
+    },
+    {
+        "year": 2020,
+        "life_satisfaction": 11.5855,
+        "healthy_eating": 10.1449,
+        "physical_activity": 11.6036,
+        "green_space": 8.603,
+        "gp_distance": 10.4979,
+        "pharmacy_distance": 9.5098,
+        "sport_facility_distance": 10.0357,
+        "air_pollution": 9.3945,
+        "noise_complaints": 9.7658,
+        "road_safety": 9.8203
+    }
 ]
