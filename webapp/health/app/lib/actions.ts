@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { getLAD } from "./postcode";
+import { getLAD } from "./postcodeServer";
 
 type FormState = {
     error?: string;

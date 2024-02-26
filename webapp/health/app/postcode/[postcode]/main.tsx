@@ -7,12 +7,12 @@ import { Keys } from "../../lib/default-data";
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false, })
 import dynamic from "next/dynamic";
 import { yearlyLADValues } from "../../lib/graphs";
-import { getLAD } from "@/app/lib/postcode";
+import { getLAD } from "@/app/lib/postcodeClient";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export async function Main({ postcode }: { postcode: string }) {
-    const lad = await getLAD(postcode, true);
+    const lad = await getLAD(postcode);
     const scores = get_scores_array(await getScores(lad));
     const ladVals = await yearlyLADValues(lad);
     const engVals = get_england_array();
