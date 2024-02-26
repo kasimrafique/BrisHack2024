@@ -44,15 +44,20 @@ async function fetchNames(query,postcode,radius){
     //console.log(data);
     let data = await getTextSearchResponse(query,postcode,radius);
     if(Object.keys(data).length==0){
-        console.log("There were no "+query+" in the specified search area");
+        console.log("nothing");
         return;
     }
     return data["places"];
 }
 
 async function printNames(data){
-    for(const place of data){
-        console.log(place["displayName"]["text"]);
+    if(data=="nothing"){
+        console.log("nothing");
+    }
+    else{
+        for(const place of data){
+            console.log(place["displayName"]["text"]);
+        }
     }
 }
 async function getLatLongFromPostcode(p){
@@ -92,4 +97,4 @@ function convertDistanceToCoordChange(radiusInKm){
         longDeviance : 1/(111.320*Math.cos(degreesToRadians(latDeviance)))
     }
 }
-printNames(await fetchNames("pharmacies", "BS14HJ", 500));
+printNames(await fetchNames("mcdonalds", "DY82HH", 15000));
