@@ -11,6 +11,7 @@ import { yearlyLADValues } from "../../lib/graphs";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export async function Main({ lad }: { lad: string }) {
+    calcLin([2, 4, 6, 8, 10 ,12]);
 
     const scores = get_scores_array(await getScores(lad));
     const ladVals = await yearlyLADValues(lad);
@@ -46,7 +47,7 @@ export async function Main({ lad }: { lad: string }) {
                     </div>
                     <div className="">
                         <p> Graph goes here </p>
-                        {/* <div className="border border-black scale-75">{plots && plots[0]}</div> */}
+                        {<div className="border border-black scale-75">{plots && plots[0]}</div>}
                     </div>
                 </div>
 
