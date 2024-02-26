@@ -40,7 +40,7 @@ function Dial({ score, color, finalScore, size }: { score: SpringValue<number>, 
                 }}>
                     <div className="absolute top-0 left-0 w-full h-full bg-gray-400 z-20" style={{ clipPath: "polygon(0% 100%, 50% 50%, 100% 100%)" }} />
                     <animated.div className="absolute top-0 left-0 w-full h-full z-10" style={{ clipPath: clipPath, backgroundColor: color }} />
-                    <div className="align-middle absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-5/6 h-5/6 bg-[#DDDBD9] z-30 rounded-full" >
+                    <div className="align-middle absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-5/6 h-5/6 bg-blackened z-30 rounded-full" >
                         <div className="flex items-center justify-center w-full h-full">
                             <p className="text-2xl font-bold text-gray-800">{finalScore}</p>
                         </div>
