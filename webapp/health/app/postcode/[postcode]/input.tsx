@@ -21,7 +21,7 @@ export default function Input(){
 
                 </form>
                 {
-                    state.error && <div className="flex justify-around text-sm text-red">{state.error}</div>
+                    state?.error && <div className="flex justify-around text-sm text-red">{state.error}</div>
                 }
                 {/* <div className="flex justify-left text-sm text-light-green"></div> */}
                         {/* <button type="submit" className="text-black justify-center"><ArrowRightCircleIcon className="h-10 w-10 text-dark-green hover:text-green-800" /></button> */}
