@@ -12,11 +12,12 @@ import { getLAD } from "@/app/lib/postcodeClient";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export async function Main({ postcode }: { postcode: string }) {
-    const lad = await getLAD(postcode);
+    const lad = await getLAD(postcode.trim().replace(/\s/g, "").toUpperCase());
     const scores = get_scores_array(await getScores(lad));
     const ladVals = await yearlyLADValues(lad);
     const engVals = get_england_array();
     const ladRecord = await getScoreOfYear(lad, 2020);
+    console.log(ladRecord);
     //const plots = ladVals && engVals && PlotLADs({ ladVals, engVals });
     //const scorePlots = scores && PlotScores({ scores });
 

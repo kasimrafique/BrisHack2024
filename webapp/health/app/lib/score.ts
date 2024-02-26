@@ -60,14 +60,17 @@ export async function getScoreOfYear(lad: string, year: number): Promise<Score |
     var sd;
 
     for (const key_eng in england_data) {
+        console.log(key_eng);
         if (year.toString() === key_eng) {
             const key = parseInt(key_eng) as keyof typeof england_data;
             england = england_data[key];
             break;
         }
     }
+    
 
     for (const key_eng in standard_deviations) {
+        console.log(key_eng);
         if (year.toString() === key_eng) {
             const key = parseInt(key_eng) as keyof typeof standard_deviations;
             sd = standard_deviations[key];
@@ -102,7 +105,7 @@ export async function getScoreOfYear(lad: string, year: number): Promise<Score |
         scores["final_score"] = (final_score / n) * (10 / 8);
     }
 
-
+    console.log(scores);
     // @ts-ignore
     return scores;
 }
