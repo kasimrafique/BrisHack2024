@@ -1,3 +1,5 @@
+"use client";
+
 import { Suspense } from "react";
 import { Score, getScores } from "../lib/score";
 import { Montserrat } from "next/font/google";
@@ -10,7 +12,9 @@ const Plot = dynamic(() => import("react-plotly.js"), { ssr: false, })
 import dynamic from "next/dynamic";
 import { yearlyEngValues, yearlyLADValues } from "../lib/graphs";
 
+
 export default function Page({ params }: { params: { lad: string } }) {
+    
     return (
         <Suspense fallback={<p>Loading...</p>}>
             <Score1 lad={params.lad} />
@@ -20,67 +24,105 @@ export default function Page({ params }: { params: { lad: string } }) {
 
 async function Score1({ lad }: { lad: string }) {
     const scores = await getScores(lad);
-    const ladVals = await yearlyLADValues(lad);
-    const engVals = await yearlyEngValues();
-    const plots = ladVals && engVals && PlotGraphs({ladVals, engVals});
+    // const ladVals = await yearlyLADValues(lad);
+    // const engVals = await yearlyEngValues();
+    //const plots = ladVals && engVals && PlotGraphs({ladVals, engVals});
+
+
+    
 
     return (
-        <div>   
+        <div className = "bg-white text-black">
+            <div className = "columns-2">
+                <div className={`flex justify-center bg-dark-green text-5xl text-white py-20 ${montserrat.className}`}> 
+                    <p>How Healthy is your Postcode?</p>
+                </div>  
+                <div className={`flex justify-center bg-dark-green text-5xl text-white py-20 ${montserrat.className}`}>
+                    <p>Add form here</p>
+                </div>
+            </div>
+
+
             <div className={`flex justify-left text-3xl font-semi-bold text-lilac py-2 my-2 ml-4 ${montserrat.className}`}> 
-                Summary</div>
+                Summary
+            </div>
 
-                <div className="flex space-x-5 items-start">
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                    <i>Life Satisfaction</i>
+            <div className = "grid grid-cols-7 gap-4" >
+                <div className={`flex justify-left text-xl font-semi-bold text-dark-green ml-4 ${montserrat.className}`}>
+                    <p>Dial goes here</p>
                 </div>
-                <div className="text-black">
-                <p>The life satisfaction rating for [LAD code here] is [score]/10 based on data from an Annual Population Survey in 2020. 
+                <div className = "col-span-4">
+                    <i  className = {`flex justify-left text-xl font-semi-bold text-dark-green gap-8 pd-3 ${montserrat.className}`}>Life Satisfaction</i>
+                    <p>The life satisfaction rating for [LAD code here] is [score]/10 based on data from an Annual Population Survey in 2020. 
                     This is [not good, below average, average, above average, very good] compared to the rest of England. </p>
-                    </div>
-                <div className="border border-black scale-75">{plots && plots[0]}</div>
                 </div>
+                <div className = "">
+                    <p> Graph goes here </p>
+                    {/* <div className="border border-black scale-75">{plots && plots[0]}</div> */}
+                </div>
+            </div>
+
             
-
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green gap-8  columns-3 py-2 ml-4 ${montserrat.className}`}>
-                <i>Healthy Eating</i>
-                Based on the 2020 data from the public health data collection Fingertips for the percentage of adults in [LAD code here] 
+            <div className = "grid grid-cols-7 gap-4" >
+                <div className={`flex justify-left text-xl font-semi-bold text-dark-green ml-4 ${montserrat.className}`}>
+                    <p>Dial goes here</p>
+                </div>
+                <div className = "col-span-4">
+                    <i  className = {`flex justify-left text-xl font-semi-bold text-dark-green gap-8 pd-3 ${montserrat.className}`}>Healthy Eating</i>
+                    <p>Based on the 2020 data from the public health data collection Fingertips for the percentage of adults in [LAD code here] 
                 classified as overweight, we have calculated your area as [score]/10 for healthy eating. 
-                This is [not good, below average, average, above average, very good] compared to the rest of England.
-                <div className="border border-blue-600 scale-75">{plots && plots[1]}</div>
+                This is [not good, below average, average, above average, very good] compared to the rest of England. </p>
                 </div>
+                <div className = "">
+                    <p> Graph goes here </p>
+                    {/* <div className="border border-black scale-75">{plots && plots[1]}</div> */}
+                </div>
+            </div>
 
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                <i className = "object-left-top">Air Pollution</i>
-                <p className = "object-top">The air pollution rating for [LAD code here] is [score]/10 based Defra’s recordings of annual mean PM2.5 in µg m-3 
-                weighted by the population.</p>
-                <div className="object-right-top border border-blue-600 scale-75">{plots && plots[4]}</div>
+            <div className = "grid grid-cols-7 gap-4" >
+                <div className={`flex justify-left text-xl font-semi-bold text-dark-green ml-4 ${montserrat.className}`}>
+                    <p>Dial goes here</p>
                 </div>
+                <div className = "col-span-4">
+                    <i  className = {`flex justify-left text-xl font-semi-bold text-dark-green gap-8 pd-3 ${montserrat.className}`}>Air Pollution</i>
+                    <p>The air pollution rating for [LAD code here] is [score]/10 based Defra’s recordings of annual mean PM2.5 in µg m-3 
+                weighted by the population. </p>
+                </div>
+                <div className = "">
+                    <p> Graph goes here </p>
+                    {/* <div className="border border-black scale-75">{plots && plots[4]}</div> */}
+                </div>
+            </div>
+  
+
+    
+
 
                 <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
                 <i>Noise Complaints</i>
                 Based on the 2020 data from the public health data collection Fingertips for the rate of noise complaints in 
                 [LAD code here], we have calculated your area as [score]/10 for noise complaints. This is [not good, below average, 
                 average, above average, very good] compared to the rest of England.
-                <div className="border border-blue-600 scale-75">{plots && plots[5]}</div>
+                {/* <div className="border border-blue-600 scale-75">{plots && plots[5]}</div> */}
                 </div>
 
                 <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
                 <i>Green Spaces</i>
                 The green space rating is [score]/10 based on the number of addresses in [LAD code here] with private outdoor space. 
                 This data is from the Office of National Statistics and Ordnance Survey data.
-                <div className="border border-blue-600 scale-75">{plots && plots[3]}</div>
+                {/* <div className="border border-blue-600 scale-75">{plots && plots[3]}</div> */}
                 </div>
 
                 <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
                 <i>Physical Activity</i>
-                <div className="border border-blue-600 scale-75">{plots && plots[2]}</div>
+               {/*  <div className="border border-blue-600 scale-75">{plots && plots[2]}</div> */}
                 </div>
 
                 <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
                 <i>Road Safety</i>
                 The road safety rating for [LAD code here] is [score]/10 based on the gov.uk Department for Transport records. 
                 This is [not good, below average, average, above average, very good] compared to the rest of England.
-                <div className="border border-blue-600 scale-75">{plots && plots[6]}</div>
+{/*                 <div className="border border-blue-600 scale-75">{plots && plots[6]}</div> */}
                 </div>
 
                 <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
@@ -112,7 +154,7 @@ async function Score1({ lad }: { lad: string }) {
     );
 }
 
-function PlotGraphs({ ladVals, engVals  } : { ladVals : (number | null)[][], engVals : (number | null)[][]}) {
+/*function PlotGraphs({ ladVals, engVals  } : { ladVals : (number | null)[][], engVals : (number | null)[][]}) {
     return ladVals?.map((r, i) => {
             return <Plot
             data={[
@@ -135,5 +177,5 @@ function PlotGraphs({ ladVals, engVals  } : { ladVals : (number | null)[][], eng
             config={ {'staticPlot': true} }
             />
     });
-}
+}*/
 
