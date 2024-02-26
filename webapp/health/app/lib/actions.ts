@@ -8,8 +8,6 @@ type FormState = {
 }
 
 export async function getPostcode(prevState: FormState, x: FormData): Promise<FormState> {
-    "use server";
-
     const postcode = x.get("postcode");
     if (typeof postcode === "string" && postcode != "") {
         const formatted = postcode.trim().replace(/\s/g, "").toUpperCase();

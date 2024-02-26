@@ -32,6 +32,7 @@ async function getNearestLAD(postcode: string, supabase: SupabaseClient) {
     if (error !== null) {
         console.log(error);
         // Handle error
+        
     }
 
     if (data === null) {
