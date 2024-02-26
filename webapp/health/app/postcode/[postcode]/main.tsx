@@ -4,8 +4,7 @@ import { calcLin } from "../../lib/math";
 import { get_england_array } from "../../lib/default-data";
 
 import { Keys } from "../../lib/default-data";
-const Plot = dynamic(() => import("react-plotly.js"), { ssr: false, })
-import dynamic from "next/dynamic";
+import { Plot } from "./plot";
 import { yearlyLADValues } from "../../lib/graphs";
 import { getLAD } from "@/app/lib/postcodeClient";
 
@@ -146,8 +145,8 @@ export async function Main({ postcode }: { postcode: string }) {
 function PlotLADs({ ladVals, engVals }: { ladVals: (number | null)[][], engVals: (number | null)[][] }) {
     return ladVals?.map((r, i) => {
         const xs = [2015, 2016, 2017, 2018, 2019, 2020];
-        const ladLinVals = calcLin(xs[0], r);
-        const engLinVals = calcLin(xs[0], engVals[i]);
+        const ladLinVals = calcLin(r);
+        const engLinVals = calcLin(engVals[i]);
 
         const ladData = {
             x: xs,
@@ -184,6 +183,7 @@ function PlotLADs({ ladVals, engVals }: { ladVals: (number | null)[][], engVals:
         }
 
         return <Plot
+            key={i}
             // THIS WORKS DONT FIX IT
             data={[ladData, engData, ladLin, engLin]}
             layout={{ title: Keys[i] }}
@@ -195,7 +195,7 @@ function PlotLADs({ ladVals, engVals }: { ladVals: (number | null)[][], engVals:
 function PlotScores({ scores }: { scores: (number | null)[][] }) {
     return scores?.map((r, i) => {
         const xs = [2015, 2016, 2017, 2018, 2019, 2020];
-        const scoresLinVals = calcLin(xs[0], r);
+        const scoresLinVals = calcLin(r);
 
         const scoresData = {
             x: xs,
@@ -215,6 +215,7 @@ function PlotScores({ scores }: { scores: (number | null)[][] }) {
         }
 
         return <Plot
+            key={i}
             // THIS WORKS DONT FIX IT
             data={[scoresData, scoresLin]}
             layout={{ title: Keys[i] }}

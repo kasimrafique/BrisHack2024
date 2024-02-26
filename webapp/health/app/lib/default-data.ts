@@ -77,27 +77,29 @@ const england_2015 = {
 }
 
 export const england_data = {
-    2015 : england_2015, 
-    2016 : england_2016,
-    2017 : england_2017,
-    2018 : england_2018,
-    2019 : england_2019,
-    2020 : england_2020
+    2015: england_2015,
+    2016: england_2016,
+    2017: england_2017,
+    2018: england_2018,
+    2019: england_2019,
+    2020: england_2020
 }
 
 export function get_england_array() {
-    let result : (number[])[] = [];
-    for (const key_t in Object.keys(england_data)) {
+    let result: (number[])[] = [];
+    for (const key_t in england_data) {
+        console.log(key_t);
         const key = parseInt(key_t) as keyof typeof england_data;
         result.push(england_data[key] && get_inner_array(england_data[key]));
     }
 
+    console.log(result);
     return result;
 }
 
-export function get_inner_array(x : typeof england_2015) {
-    let result : (number)[] = [];
-    for (const key_t in Object.keys(england_2015)) {
+export function get_inner_array(x: typeof england_2015) {
+    let result: (number)[] = [];
+    for (const key_t in england_2015) {
         const key = key_t as keyof typeof england_2015;
         result.push(x[key]);
     }
@@ -116,7 +118,7 @@ export const Keys: string[] = [
 ]
 
 export const standard_deviations = {
-    2015 : {
+    2015: {
         "year": 2015,
         "life_satisfaction": 10.3106,
         "healthy_eating": 9.8802,
@@ -129,7 +131,7 @@ export const standard_deviations = {
         "noise_complaints": 9.1127,
         "road_safety": 9.4775
     },
-    2016 : {
+    2016: {
         "year": 2016,
         "life_satisfaction": 9.7558,
         "healthy_eating": 9.8804,
@@ -142,7 +144,7 @@ export const standard_deviations = {
         "noise_complaints": 9.0471,
         "road_safety": 9.4892
     },
-    2017 : {
+    2017: {
         "year": 2017,
         "life_satisfaction": 9.8004,
         "healthy_eating": 9.7739,
@@ -155,7 +157,7 @@ export const standard_deviations = {
         "noise_complaints": 9.1724,
         "road_safety": 9.7175
     },
-    2018 : {
+    2018: {
         "year": 2018,
         "life_satisfaction": 10.1304,
         "healthy_eating": 10.4171,
@@ -168,7 +170,7 @@ export const standard_deviations = {
         "noise_complaints": 9.4793,
         "road_safety": 9.759
     },
-    2019 : {
+    2019: {
         "year": 2019,
         "life_satisfaction": 9.8352,
         "healthy_eating": 10.8037,
@@ -181,7 +183,7 @@ export const standard_deviations = {
         "noise_complaints": 9.7657,
         "road_safety": 9.8417
     },
-    2020 : {
+    2020: {
         "year": 2020,
         "life_satisfaction": 11.5855,
         "healthy_eating": 10.1449,
