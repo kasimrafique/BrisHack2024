@@ -12,7 +12,7 @@ export default function Home() {
 
     return (
         <div className="bg-white fill-slate-400">
-            <div className={`flex justify-center bg-dark-green text-5xl text-white py-20 ${montserrat.className}`}>
+            <div className={`flex justify-center bg-dark-green text-5xl text-white ml-5 py-20 ${montserrat.className}`}>
                 <p>How Healthy is your Postcode?</p>
             </div>
 
