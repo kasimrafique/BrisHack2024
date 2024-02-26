@@ -1,11 +1,8 @@
-"use server";
-
 import { createClient as createServerClient } from "./server-client";
-import { createClient } from "./client";
+import { createClient as createClientClient } from "./client";
+import { SupabaseClient } from "@supabase/supabase-js";
 
-export async function getLAD(postcode: string, clientSide: boolean = false) {
-    const supabase = clientSide ? createClient() : createServerClient();
-
+export async function getLAD(postcode: string, supabase: SupabaseClient) {
     const { data, error } = await supabase
         .from("postcodes")
         .select("LAD")
@@ -18,14 +15,13 @@ export async function getLAD(postcode: string, clientSide: boolean = false) {
     }
 
     if (data.length === 0) {
-        return getNearestLAD(postcode);
+        return getNearestLAD(postcode, supabase);
     }
 
     return data[0].LAD;
 }
 
-async function getNearestLAD(postcode: string) {
-    const supabase = createClient();
+async function getNearestLAD(postcode: string, supabase: SupabaseClient) {
     const start = postcode.slice(0, -3);
 
     const { data, error } = await supabase
