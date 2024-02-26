@@ -46,7 +46,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className={`flex justify-center  text-5xl text-white pl-7 py-20 ${montserrat.className}`}>
                         <p>How Healthy is your Postcode?</p>
                     </div>
-                    <div className={`flex justify-center text-3xl text-white py-20 ${montserrat.className}`}>
+                    <div className={`justify-center text-3xl text-white py-20 ${montserrat.className}`}>
                         <Input />
                     </div>
                 </div>
