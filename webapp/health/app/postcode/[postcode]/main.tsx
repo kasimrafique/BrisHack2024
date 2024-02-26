@@ -98,8 +98,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Healthy Eating</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>Based on the 2020 data from the public health data collection Fingertips for the percentage of adults in {placeName} 
-                                classified as overweight, we have calculated your area as {ladRecord && ladRecord.healthy_eating}/10 for healthy eating.</li>
+                            <li>Based on the 2020 data from the public health data collection Fingertips for the percentage of adults in {placeName} classified as overweight, we have calculated your area as {ladRecord && ladRecord.healthy_eating}/10 for healthy eating.</li>
                             <li>This is {ladRecord && ladRecord.healthy_eating && getCommentFromScore(ladRecord.healthy_eating)} compared to the rest of England. </li>
                         </ul>
 
@@ -134,8 +133,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Noise Complaints</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>Based on the 2020 data from the public health data collection Fingertips for the rate of noise complaints in
-                            {placeName}, we have calculated your area as {ladRecord && ladRecord.noise_complaints}/10 for noise complaints.</li>
+                            <li>Based on the 2020 data from the public health data collection Fingertips for the rate of noise complaints in {placeName}, we have calculated your area as {ladRecord && ladRecord.noise_complaints}/10 for noise complaints.</li>
                             <li>This is {ladRecord && ladRecord.noise_complaints && getCommentFromScore(ladRecord.noise_complaints)} compared to the rest of England. </li>
                         </ul>
 
@@ -208,7 +206,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Distance to GP</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>The median km distance from your local GP practice is [distance here if Parthiv finds it] based on NHS records of
+                            <li>The median km distance from your local GP practice is [distance here] based on NHS records of
                                 addresses. This gives your area a score of {ladRecord && ladRecord.gp_distance}/10</li>
                             <li>This is {ladRecord && ladRecord.gp_distance && getCommentFromScore(ladRecord.gp_distance)} compared to the rest of England. </li>
                         </ul>
@@ -224,7 +222,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Distance to Pharmacies</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>The median km distance from your local pharmacy is [distance here if Parthiv finds it] based on NHS records of
+                            <li>The median km distance from your local pharmacy is [distance here] based on NHS records of
                                 addresses. This gives your area a score of {ladRecord && ladRecord.pharmacy_distance}/10</li>
                             <li>This is {ladRecord && ladRecord.pharmacy_distance && getCommentFromScore(ladRecord.pharmacy_distance)} compared to the rest of England. </li>
                         </ul>
@@ -239,8 +237,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Distance to Sports Facilities</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>The median km distance from your local sports fascilities is [distance here if Parthiv finds it] based on NHS records of
-                                addresses. This gives your area a score of {ladRecord && ladRecord.sport_facility_distance}/10</li>
+                            <li>The median km distance from your local sports fascilities is [distance here] based on sports facilities addresses from Active Places Power website.  This gives your area a score of {ladRecord && ladRecord.sport_facility_distance}/10</li>
                             <li>This is {ladRecord&&ladRecord.sport_facility_distance&&getCommentFromScore(ladRecord.sport_facility_distance)} compared to the rest of England. </li>
                         </ul>
 
