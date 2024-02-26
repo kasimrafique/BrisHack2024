@@ -172,7 +172,7 @@ export async function Main({ postcode }: { postcode: string }) {
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>Based on the 2020 data from the public health data collection Fingertips for the respondents aged 19 and over in {lad} 
                                 of their physical activity per week, we have calculated your area as {ladRecord && ladRecord.physical_activity}/10 for physical activity. </li>
-                            <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
+                            <li>This is {ladRecord && ladRecord.physical_activity && getCommentFromScore(ladRecord.physical_activity)} compared to the rest of England. </li>
                         </ul>
 
                     </div>
@@ -208,7 +208,7 @@ export async function Main({ postcode }: { postcode: string }) {
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>The median km distance from your local GP practice is [distance here if Parthiv finds it] based on NHS records of
                                 addresses. This gives your area a score of {ladRecord && ladRecord.gp_distance}/10</li>
-                            <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
+                            <li>This is {ladRecord && ladRecord.gp_distance && getCommentFromScore(ladRecord.gp_distance)} compared to the rest of England. </li>
                         </ul>
 
                     </div>
@@ -224,7 +224,7 @@ export async function Main({ postcode }: { postcode: string }) {
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>The median km distance from your local pharmacy is [distance here if Parthiv finds it] based on NHS records of
                                 addresses. This gives your area a score of {ladRecord && ladRecord.pharmacy_distance}/10</li>
-                            <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
+                            <li>This is {ladRecord && ladRecord.pharmacy_distance && getCommentFromScore(ladRecord.pharmacy_distance)} compared to the rest of England. </li>
                         </ul>
 
                     </div>
@@ -239,7 +239,7 @@ export async function Main({ postcode }: { postcode: string }) {
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>The median km distance from your local sports fascilities is [distance here if Parthiv finds it] based on NHS records of
                                 addresses. This gives your area a score of {ladRecord && ladRecord.sport_facility_distance}/10</li>
-                            <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
+                            <li>This is {ladRecord&&ladRecord.sport_facility_distance&&getCommentFromScore(ladRecord.sport_facility_distance)} compared to the rest of England. </li>
                         </ul>
 
                     </div>

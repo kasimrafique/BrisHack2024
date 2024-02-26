@@ -82,7 +82,7 @@ export async function getScoreOfYear(lad: string, year: number): Promise<Score |
 
     for (const key_t in england!) {
         const key: keyof Data = key_t as keyof Data;
-        let score = 4;
+        let score = 3;
         if (data[key] === null) {
             continue;
         }
@@ -90,11 +90,19 @@ export async function getScoreOfYear(lad: string, year: number): Promise<Score |
         // @ts-ignore
         const z = (data[key] - england[key]) / sd[key];
         if (key in ["life_satisfaction", "healthy_eating", "physical_activity", "green_space"]) {
-            score += z;
-        } else {
             score -= z;
+        } else {
+            score += z;
+        }
+        
+        score *= 10 / 6;
+        if (score < 0) {
+            score = 0;
         }
 
+        if (score > 10) {
+            score = 10;
+        }
         scores[key] = +(score.toFixed(1));
         final_score += score;
         n += 1;
@@ -102,7 +110,7 @@ export async function getScoreOfYear(lad: string, year: number): Promise<Score |
 
     // @ts-ignore
     if (n !== 0) {
-        scores["final_score"] = +(((final_score / n) * (10 / 8)).toFixed(1));
+        scores["final_score"] = +((final_score / n).toFixed(1));
     }
 
     console.log(scores);
