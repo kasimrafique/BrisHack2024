@@ -1,0 +1,12 @@
+{
+  "type" : "module",
+  "dependencies": {
+    "@types/google.maps": "^3.55.3",
+    "@types/node": "^20.11.20",
+    "google-places": "^0.0.2",
+    "node-fetch": "^3.3.2",
+    "wretch": "^2.8.0"
+  }
+
+}
+
