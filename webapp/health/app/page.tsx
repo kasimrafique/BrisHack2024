@@ -5,6 +5,7 @@ import { Keys } from "./lib/default-data"
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false, })
 import { getLAD } from "./lib/postcode";
 import { Montserrat } from "next/font/google";
+import { england_data } from "./lib/default-data";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 import { yearlyLADValues, yearlyEngValues } from "./lib/graphs";
@@ -29,7 +30,7 @@ export default function Home() {
         }
     }
     
-    const plots = ladVals && engVals && PlotGraphs({ladVals,engVals});
+    const plots = ladVals && engVals && PlotGraphs({ladVals, england_data});
     return (
         <div className="bg-white fill-slate-400">
             <div className={`flex justify-center bg-dark-green text-5xl text-white py-20 ${montserrat.className}`}> 
@@ -130,11 +131,11 @@ export default function Home() {
 
         
                 <div className={`flex justify-left text-3xl font-semi-bold text-lilac py-4 ml-4  ${montserrat.className}`}> Graphs</div>
-                <div className="border border-black scale-75">{plots && plots[0]}</div>
+                {/* <div className="border border-black scale-75">{plots && plots[0]}</div>
                 <div className="border border-blue-60 scale-75">{plots && plots[1]}</div>
                 <div className="border border-black scale-75">{plots && plots[2]}</div>
                 <div className="border border-blue-60 scale-75">{plots && plots[3]}</div>
-                <div className="border border-black scale-75">{plots && plots[4]}</div>
+                <div className="border border-black scale-75">{plots && plots[4]}</div> */}
                 {/* <div>{data && <PlotGraphs data={data}/>}</div> */}
             </div>
             
@@ -143,27 +144,3 @@ export default function Home() {
 }
 
 
-function PlotGraphs({ ladVals, engVals  } : { ladVals : (number | null)[][], engVals : (number | null)[][]}) {
-    return ladVals?.map((r, i) => {
-            return <Plot
-            data={[
-            {
-                x: [2015, 2016, 2017, 2018, 2019, 2020],
-                y: r,
-                type: 'scatter',
-                mode: 'lines',
-                marker: {color: 'purple'},
-            },
-            {
-                x: [2015, 2016, 2017, 2018, 2019, 2020],
-                y: engVals[i],
-                type: 'scatter',
-                mode: 'lines',
-                marker: {color: 'blue'},
-            }
-            ]}
-            layout={ {title: Keys[i]} }
-            config={ {'staticPlot': true} }
-            />
-    });
-}
