@@ -129,6 +129,12 @@ export default function Home() {
                 <div className={`flex justify-left text-3xl font-semi-bold text-lilac py-4 ml-4  ${montserrat.className}`}> Graphs</div>
 
         
+                <div className={`flex justify-left text-3xl font-semi-bold text-lilac py-4 ml-4  ${montserrat.className}`}> Graphs</div>
+                <div className="border border-black scale-75">{plots && plots[0]}</div>
+                <div className="border border-blue-60 scale-75">{plots && plots[1]}</div>
+                <div className="border border-black scale-75">{plots && plots[2]}</div>
+                <div className="border border-blue-60 scale-75">{plots && plots[3]}</div>
+                <div className="border border-black scale-75">{plots && plots[4]}</div>
                 {/* <div>{data && <PlotGraphs data={data}/>}</div> */}
             </div>
             
