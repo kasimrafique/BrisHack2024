@@ -1,5 +1,7 @@
-import { Data, createClient } from "./server-client";
+import { Data } from "./server-client";
 import { england_data, standard_deviations} from "./default-data";
+import { createClient } from "./client";
+
 
 export type Score = {
     "life_satisfaction": number | null
