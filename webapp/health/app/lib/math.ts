@@ -46,7 +46,7 @@ export function calcLin(start : number, vals_n : (number | null)[]) {
   
   
     const vals = vals_n as number[];
-    // console.log(vals)
+    console.log(vals)
   
     const initVal = 0;
     const n = 6;
@@ -64,12 +64,12 @@ export function calcLin(start : number, vals_n : (number | null)[]) {
       return total + (val * (i-1));
     }, initVal); 
   
-    console.log(`${nSum}, ${sum}, ${squareSum}, ${productSum}`)
+    console.log(`Testing: ${nSum}, ${sum}, ${squareSum}, ${productSum}`)
   
     // Calculate, m & c for "y = mx + c"
     let gradient = (n * productSum - nSum * sum) / (n * squareSum - nSum * nSum);
     let intercept = (sum / n) - ((gradient * nSum) / n);
-    //console.log(`${gradient}, ${intercept}`)
+    console.log(`${gradient}, ${intercept}`)
 
   
     const ys = [];
@@ -77,7 +77,7 @@ export function calcLin(start : number, vals_n : (number | null)[]) {
       // y_i = mx_i + c
       ys.push(i * gradient + intercept);
     }
-    //console.log(`${ys}`)
+    console.log(`${ys}`)
 
     return ys;
   }

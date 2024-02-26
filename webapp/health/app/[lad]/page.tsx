@@ -2,7 +2,8 @@ import { Suspense } from "react";
 import { Score, getScores } from "../lib/score";
 import { Montserrat } from "next/font/google";
 const montserrat = Montserrat({ subsets: ["latin"] });
-import { england_data } from "../lib/default-data";
+import { calcLin } from "../lib/math";
+import { get_england_array, england_data } from "../lib/default-data";
 
 import { useState } from "react";
 import { Keys } from "../lib/default-data";
@@ -19,9 +20,12 @@ export default function Page({ params }: { params: { lad: string } }) {
 }
 
 async function Score1({ lad }: { lad: string }) {
+
+    calcLin(10, [1,2,3,4,5,6]);
+
     const scores = await getScores(lad);
     const ladVals = await yearlyLADValues(lad);
-    const engVals = await yearlyEngValues();
+    const engVals = get_england_array();
     const plots = ladVals && engVals && PlotGraphs({ladVals, engVals});
 
     return (
@@ -114,26 +118,49 @@ async function Score1({ lad }: { lad: string }) {
 
 function PlotGraphs({ ladVals, engVals  } : { ladVals : (number | null)[][], engVals : (number | null)[][]}) {
     return ladVals?.map((r, i) => {
-            return <Plot
-            data={[
-            {
-                x: [2015, 2016, 2017, 2018, 2019, 2020],
-                y: r,
-                type: 'scatter',
-                mode: 'lines',
-                marker: {color: 'purple'},
-            },
-            {
-                x: [2015, 2016, 2017, 2018, 2019, 2020],
-                y: engVals[i],
-                type: 'scatter',
-                mode: 'lines',
-                marker: {color: 'blue'},
-            }
-            ]}
-            layout={ {title: Keys[i]} }
-            config={ {'staticPlot': true} }
-            />
+        const xs = [2015, 2016, 2017, 2018, 2019, 2020];
+        const ladLinVals = calcLin(xs[0], r);
+        const engLinVals = calcLin(xs[0], engVals[i]);
+
+        const ladData = {
+            x: xs,
+            y: r,
+            type: 'scatter',
+            mode: 'lines',
+            marker: {color: 'purple'}
+        }
+
+        const engData = {
+            x: xs,
+            y: engVals[i],
+            type: 'scatter',
+            mode: 'lines',
+            marker: {color: 'blue'}
+        }
+
+        const ladLin = {
+            x: xs,
+            y: ladLinVals,
+            type: 'scatter',
+            mode: 'lines',
+            marker: {color: 'purple'},
+            line: { dash: 'dot' }
+        }
+
+        const engLin = {
+            x: xs,
+            y: engLinVals,
+            type: 'scatter',
+            mode: 'lines',
+            marker: {color: 'blue'},
+            line: { dash: 'dot' }
+        }
+        
+        return <Plot
+        // THIS WORKS DONT FIX IT
+        data={[ladData, engData, ladLin, engLin]}
+        layout={ {title: Keys[i]} }
+        config={ {'staticPlot': true} }
+        />
     });
 }
-
