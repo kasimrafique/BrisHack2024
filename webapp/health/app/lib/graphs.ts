@@ -1,6 +1,7 @@
 "use server";
 
-import { Data, createClient } from "./server-client";
+import { createClient } from "./client";
+import { Data } from "./server-client";
 
 export type GraphData = {
   "life_satisfaction": number | null
@@ -14,7 +15,7 @@ export type GraphData = {
 
 async function transpose(data : GraphData[] | null) {
   let data_t : (number | null)[][] = [];
-  data && Object.keys(data[0]).map((key_t, num) => {
+  data && data.length > 0 && Object.keys(data[0]).map((key_t, num) => {
     const key = key_t as keyof GraphData;
     data_t[num] = data?.map(x => x[key]);
   });

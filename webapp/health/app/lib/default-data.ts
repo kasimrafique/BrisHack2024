@@ -12,7 +12,6 @@ const england_2020 = {
 }
 
 const england_2019 = {
-    "area_type": "Country",
     "life_satisfaction": 100.7,
     "healthy_eating": 95.6,
     "physical_activity": 102.2,
@@ -26,7 +25,6 @@ const england_2019 = {
 }
 
 const england_2018 = {
-    "area_type": "Country",
     "life_satisfaction": 103.5,
     "healthy_eating": 96.1,
     "physical_activity": 100.3,
@@ -40,7 +38,6 @@ const england_2018 = {
 }
 
 const england_2017 = {
-    "area_type": "Country",
     "life_satisfaction": 102,
     "healthy_eating": 101.2,
     "physical_activity": 99.7,
@@ -54,7 +51,6 @@ const england_2017 = {
 }
 
 const england_2016 = {
-    "area_type": "Country",
     "life_satisfaction": 101.7,
     "healthy_eating": 100,
     "physical_activity": 100,
@@ -68,7 +64,6 @@ const england_2016 = {
 }
 
 const england_2015 = {
-    "area_type": "Country",
     "life_satisfaction": 100,
     "healthy_eating": 100,
     "physical_activity": 100,
@@ -88,6 +83,26 @@ export const england_data = {
     2018 : england_2018,
     2019 : england_2019,
     2020 : england_2020
+}
+
+export function get_england_array() {
+    let result : (number[])[] = [];
+    for (const key_t in Object.keys(england_data)) {
+        const key = parseInt(key_t) as keyof typeof england_data;
+        result.push(england_data[key] && get_inner_array(england_data[key]));
+    }
+
+    return result;
+}
+
+export function get_inner_array(x : typeof england_2015) {
+    let result : (number)[] = [];
+    for (const key_t in Object.keys(england_2015)) {
+        const key = key_t as keyof typeof england_2015;
+        result.push(x[key]);
+    }
+
+    return result;
 }
 
 export const Keys: string[] = [

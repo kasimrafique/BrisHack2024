@@ -5,7 +5,9 @@ import { Keys } from "./lib/default-data"
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false, })
 import { getLAD } from "./lib/postcode";
 import { Montserrat } from "next/font/google";
-import { england_data } from "./lib/default-data";
+import { calcLin } from "./lib/math";
+
+import { get_england_array,england_data } from "./lib/default-data";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 import { yearlyLADValues, yearlyEngValues } from "./lib/graphs";
@@ -30,7 +32,6 @@ export default function Home() {
         }
     }
     
-    const plots = ladVals && engVals && PlotGraphs({ladVals, england_data});
     return (
         <div className="bg-white fill-slate-400">
             <div className={`flex justify-center bg-dark-green text-5xl text-white py-20 ${montserrat.className}`}> 
@@ -46,101 +47,8 @@ export default function Home() {
                     <button type="submit" className="text-black">Submit</button>
                 </form>
                 <div className="flex justify-left text-sm text-light-green"></div> 
-
-                <div className={`flex justify-left text-3xl font-semi-bold text-lilac py-2 my-2 ml-4 ${montserrat.className}`}> 
-                Summary</div>
-
-                <div className="flex space-x-5 items-start">
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                    <i>Life Satisfaction</i>
-                </div>
-                <div className="text-black">
-                <p>The life satisfaction rating for [LAD code here] is [score]/10 based on data from an Annual Population Survey in 2020. 
-                    This is [not good, below average, average, above average, very good] compared to the rest of England. </p>
-                    </div>
-                <div className="border border-black scale-75">{plots && plots[0]}</div>
-                </div>
-            
-
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green gap-8  columns-3 py-2 ml-4 ${montserrat.className}`}>
-                <i>Healthy Eating</i>
-                Based on the 2020 data from the public health data collection Fingertips for the percentage of adults in [LAD code here] 
-                classified as overweight, we have calculated your area as [score]/10 for healthy eating. 
-                This is [not good, below average, average, above average, very good] compared to the rest of England.
-                <div className="border border-blue-600 scale-75">{plots && plots[1]}</div>
-                </div>
-
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                <i className = "object-left-top">Air Pollution</i>
-                <p className = "object-top">The air pollution rating for [LAD code here] is [score]/10 based Defra’s recordings of annual mean PM2.5 in µg m-3 
-                weighted by the population.</p>
-                <div className="object-right-top border border-blue-600 scale-75">{plots && plots[4]}</div>
-                </div>
-
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                <i>Noise Complaints</i>
-                Based on the 2020 data from the public health data collection Fingertips for the rate of noise complaints in 
-                [LAD code here], we have calculated your area as [score]/10 for noise complaints. This is [not good, below average, 
-                average, above average, very good] compared to the rest of England.
-                <div className="border border-blue-600 scale-75">{plots && plots[5]}</div>
-                </div>
-
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                <i>Green Spaces</i>
-                The green space rating is [score]/10 based on the number of addresses in [LAD code here] with private outdoor space. 
-                This data is from the Office of National Statistics and Ordnance Survey data.
-                <div className="border border-blue-600 scale-75">{plots && plots[3]}</div>
-                </div>
-
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                <i>Physical Activity</i>
-                <div className="border border-blue-600 scale-75">{plots && plots[2]}</div>
-                </div>
-
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                <i>Road Safety</i>
-                The road safety rating for [LAD code here] is [score]/10 based on the gov.uk Department for Transport records. 
-                This is [not good, below average, average, above average, very good] compared to the rest of England.
-                <div className="border border-blue-600 scale-75">{plots && plots[6]}</div>
-                </div>
-
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                <i>Distance to GP services </i>
-                The median km distance from your local GP practice is [distance here if Parthiv finds it] based on NHS records of 
-                addresses. This gives your area a score of [score]/10 which is [not good, below average, average, above average, 
-                very good] compared to the rest of England.
-                </div>
-
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                <i>Distance to Pharmacies</i>
-                The median km distance from your local pharmacy is [distance here if Parthiv finds it] based on NHS records of 
-                addresses. This gives your area a score of [score]/10 which is [not good, below average, average, above average, 
-                very good] compared to the rest of England.
-                </div>
-
-                <div className={`flex justify-left text-xl font-semi-bold text-dark-green py-2 ml-4 ${montserrat.className}`}>
-                <i>Distance to Sports</i>
-                The median km distance from your local pharmacy is [distance here if Parthiv finds it] based on NHS records of 
-                addresses. This gives your area a score of [score]/10 which is [not good, below average, average, above average, 
-                very good] compared to the rest of England.
-                </div>
-
-
-
-                <div className={`flex justify-left text-3xl font-semi-bold text-lilac py-4 ml-4  ${montserrat.className}`}> Graphs</div>
-
-        
-                <div className={`flex justify-left text-3xl font-semi-bold text-lilac py-4 ml-4  ${montserrat.className}`}> Graphs</div>
-                {/* <div className="border border-black scale-75">{plots && plots[0]}</div>
-                <div className="border border-blue-60 scale-75">{plots && plots[1]}</div>
-                <div className="border border-black scale-75">{plots && plots[2]}</div>
-                <div className="border border-blue-60 scale-75">{plots && plots[3]}</div>
-                <div className="border border-black scale-75">{plots && plots[4]}</div> */}
-                {/* <div>{data && <PlotGraphs data={data}/>}</div> */}
             </div>
             
         </div>
     );
 }
-
-
