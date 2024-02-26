@@ -10,15 +10,14 @@ export async function getLAD(postcode: string, supabase: SupabaseClient) {
 
     if (error !== null) {
         console.log(error);
-        // Handle error
         return null;
     }
 
     if (data.length === 0) {
         return getNearestLAD(postcode, supabase);
     }
-    return data[0].LAD;
 
+    return data[0].LAD;
 }
 
 async function getNearestLAD(postcode: string, supabase: SupabaseClient) {
@@ -31,7 +30,7 @@ async function getNearestLAD(postcode: string, supabase: SupabaseClient) {
 
     if (error !== null) {
         console.log(error);
-        // Handle error
+        return null;
     }
 
     if (data === null) {

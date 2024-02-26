@@ -14,8 +14,10 @@ export async function getPostcode(prevState: FormState, x: FormData): Promise<Fo
     if (typeof postcode === "string" && postcode != "") {
         const formatted = postcode.trim().replace(/\s/g, "").toUpperCase();
         const lad = await getLAD(formatted);
-        redirect(`/postcode/${formatted}`);
-    } else {
-        return { error: "Invalid postcode" };
+        if (lad !== "" && typeof lad === "string") {
+            redirect(`/postcode/${formatted}`);
+        }
     }
+
+    return { error: "Invalid postcode" };
 }

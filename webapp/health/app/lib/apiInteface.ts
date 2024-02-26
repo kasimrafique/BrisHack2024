@@ -11,6 +11,9 @@ const environApiKey = process.env.NEXT_PUBLIC_ENVIRON_API_KEY; //parthivs key
 
 async function getTextSearchResponse(query:String,postcode:String,radiusVal:number) {
     let highLowPair = await getHighLowPair(postcode,radiusVal);
+    if (!highLowPair) {
+        return {};
+    }
     const res = await fetch('https://places.googleapis.com/v1/places:searchText',{
         method:'POST',
         headers:{
@@ -41,6 +44,9 @@ async function getTextSearchResponse(query:String,postcode:String,radiusVal:numb
 
 export async function getAirQualityIndex(postcode:String){
     const latLongPair = await getLatLongFromPostcode(postcode);
+    if (!latLongPair) {
+        return null;
+    }
     const res = await fetch(`https://airquality.googleapis.com/v1/currentConditions:lookup?key=${environApiKey}`,{
         method: 'POST',
         body: JSON.stringify({
@@ -109,6 +115,9 @@ async function printNames(data: any){
 async function getLatLongFromPostcode(p:String){
     const res = await fetch(`https://api.postcodes.io/postcodes/${p}`)
     const data = await res.json();
+    if (!data["result"]) {
+        return null;
+    }
     const latLong = {
         latitude: data["result"]["latitude"],
         longitude: data["result"]["longitude"]
@@ -119,6 +128,9 @@ async function getLatLongFromPostcode(p:String){
 
 async function getHighLowPair(postcode:String, radius:number){
     let postcodeCoords = await getLatLongFromPostcode(postcode);
+    if (!postcodeCoords) {
+        return null;
+    }
     let coordChanges = convertDistanceToCoordChange(radius/1000);
     let highLowPair = {
         high: {
