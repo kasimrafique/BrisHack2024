@@ -1,5 +1,5 @@
 import { Data } from "./server-client";
-import { england_data, standard_deviations} from "./default-data";
+import { england_data, standard_deviations } from "./default-data";
 import { createClient } from "./client";
 
 
@@ -17,7 +17,7 @@ export type Score = {
     "final_score": number | null
 }
 
-export async function getScoreOfYear(lad: string, year : number): Promise<Score | null> {
+export async function getScoreOfYear(lad: string, year: number): Promise<Score | null> {
     const supabase = createClient();
 
     const { data, error }: {
@@ -26,7 +26,7 @@ export async function getScoreOfYear(lad: string, year : number): Promise<Score 
     } = await supabase
         .from("data")
         .select("area_name, area_type, life_satisfaction, healthy_eating, physical_activity, green_space, gp_distance, pharmacy_distance, sport_facility_distance, air_pollution, noise_complaints, road_safety")
-        .eq("LAD", lad)
+        .eq("area_code", lad)
         .eq("year", year)
         .single();
 
@@ -55,20 +55,20 @@ export async function getScoreOfYear(lad: string, year : number): Promise<Score 
     };
     let final_score = 0;
     let n = 0;
-    
+
     var england;
     var sd;
 
-    for (const key_eng in england_data){
-        if (year.toString() === key_eng){
+    for (const key_eng in england_data) {
+        if (year.toString() === key_eng) {
             const key = parseInt(key_eng) as keyof typeof england_data;
             england = england_data[key];
             break;
         }
     }
 
-    for (const key_eng in standard_deviations){
-        if (year.toString() === key_eng){
+    for (const key_eng in standard_deviations) {
+        if (year.toString() === key_eng) {
             const key = parseInt(key_eng) as keyof typeof standard_deviations;
             sd = standard_deviations[key];
             break;
@@ -108,21 +108,21 @@ export async function getScoreOfYear(lad: string, year : number): Promise<Score 
 }
 
 
-export async function getScores(lad : string){
-    let scores : {
-        2015 : Score | null,
-        2016 : Score | null,
-        2017 : Score | null,
-        2018 : Score | null,
-        2019 : Score | null,
-        2020 : Score | null,
+export async function getScores(lad: string) {
+    let scores: {
+        2015: Score | null,
+        2016: Score | null,
+        2017: Score | null,
+        2018: Score | null,
+        2019: Score | null,
+        2020: Score | null,
     } = {
-        2015 : null,
-        2016 : null,
-        2017 : null,
-        2018 : null,
-        2019 : null,
-        2020 : null,
+        2015: null,
+        2016: null,
+        2017: null,
+        2018: null,
+        2019: null,
+        2020: null,
     }
 
     for (const keyS in scores) {
@@ -132,15 +132,15 @@ export async function getScores(lad : string){
     return scores;
 }
 
-export function get_scores_array(x : {
-    2015 : Score | null,
-    2016 : Score | null,
-    2017 : Score | null,
-    2018 : Score | null,
-    2019 : Score | null,
-    2020 : Score | null,
+export function get_scores_array(x: {
+    2015: Score | null,
+    2016: Score | null,
+    2017: Score | null,
+    2018: Score | null,
+    2019: Score | null,
+    2020: Score | null,
 }) {
-    let result : number[][] = [];
+    let result: number[][] = [];
     for (const key_t in Object.keys(x)) {
         const key = parseInt(key_t) as keyof typeof x;
         if (!x[key]) {
@@ -157,12 +157,12 @@ export function get_scores_array(x : {
     return result;
 }
 
-export function get_inner_array(x : Score | null) {
+export function get_inner_array(x: Score | null) {
     if (!x) {
         return null;
     }
 
-    let result : number[] = [];
+    let result: number[] = [];
     for (const key_t in Object.keys(x)) {
         const key = key_t as keyof Score;
         if (!x[key]) {
