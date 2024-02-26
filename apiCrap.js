@@ -1,9 +1,9 @@
 //to do 
 
 // api for 
-// api for latitude and longitude
-// finding gyms and parks in the local area
-// api for air pollution information
+// api for latitude and longitude - done
+// finding gyms and parks in the local area - done
+// api for air pollution information - done
 // food hygiene
 
 import fetch from 'node-fetch';
@@ -16,7 +16,7 @@ async function getTextSearchResponse(query,postcode,radiusVal) {
         method:'POST',
         headers:{
             'X-Goog-Api-Key':mapsApiKey,
-            'X-Goog-FieldMask':'places.displayName',
+            'X-Goog-FieldMask':'places.displayName,places.shortFormattedAddress,places.websiteUri',
         },
         body: JSON.stringify({
             textQuery:query,
@@ -38,6 +38,21 @@ async function getTextSearchResponse(query,postcode,radiusVal) {
     return data; //this is a json object
 }
 
+async function getAirQualityIndex(postcode){
+    const latLongPair = getLatLongFromPostcode(postcode);
+    const res = await fetch(`https://airquality.googleapis.com/v1/currentConditions:lookup?${mapsApiKey}`,{
+        method: 'POST',
+        body: JSON.stringify({
+            location:{
+                latitude: latLongPair["latitude"],
+                longitude: latLongPair["longitude"]
+            }
+        })
+    });
+    const data = await res.json();
+
+}
+
 async function fetchNames(query,postcode,radius){ 
     //imagine you are in google maps, 'query' is what you would type into the search bar
     //data is a json object, postcode is a string, radius is a number
@@ -51,6 +66,7 @@ async function fetchNames(query,postcode,radius){
 }
 
 async function printNames(data){
+    console.log(data);
     if(data=="nothing"){
         console.log("nothing");
     }
@@ -97,4 +113,4 @@ function convertDistanceToCoordChange(radiusInKm){
         longDeviance : 1/(111.320*Math.cos(degreesToRadians(latDeviance)))
     }
 }
-printNames(await fetchNames("mcdonalds", "DY82HH", 15000));
+printNames(await fetchNames("gym", "BS14HJ", 5000));
