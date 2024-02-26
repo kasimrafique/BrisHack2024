@@ -80,7 +80,7 @@ export async function getScoreOfYear(lad: string, year: number): Promise<Score |
 
 
 
-    for (const key_t in Object.keys(england!)) {
+    for (const key_t in england!) {
         const key: keyof Data = key_t as keyof Data;
         let score = 4;
         if (data[key] === null) {
@@ -144,7 +144,7 @@ export function get_scores_array(x: {
     2020: Score | null,
 }) {
     let result: number[][] = [];
-    for (const key_t in Object.keys(x)) {
+    for (const key_t in x) {
         const key = parseInt(key_t) as keyof typeof x;
         if (!x[key]) {
             return null;
@@ -166,7 +166,7 @@ export function get_inner_array(x: Score | null) {
     }
 
     let result: number[] = [];
-    for (const key_t in Object.keys(x)) {
+    for (const key_t in x) {
         const key = key_t as keyof Score;
         if (!x[key]) {
             return null;
