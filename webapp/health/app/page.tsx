@@ -5,6 +5,8 @@ import { Keys } from "./lib/default-data"
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false, })
 import { getLAD } from "./lib/postcode";
 import { Montserrat } from "next/font/google";
+import { calcLin } from "./lib/math";
+
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 import { yearlyLADValues, yearlyEngValues } from "./lib/graphs";
@@ -71,25 +73,50 @@ export default function Home() {
 
 function PlotGraphs({ ladVals, engVals  } : { ladVals : (number | null)[][], engVals : (number | null)[][]}) {
     return ladVals?.map((r, i) => {
-            return <Plot
-            data={[
-            {
-                x: [2015, 2016, 2017, 2018, 2019, 2020],
-                y: r,
-                type: 'scatter',
-                mode: 'lines',
-                marker: {color: 'purple'},
-            },
-            {
-                x: [2015, 2016, 2017, 2018, 2019, 2020],
-                y: engVals[i],
-                type: 'scatter',
-                mode: 'lines',
-                marker: {color: 'blue'},
-            }
-            ]}
-            layout={ {title: Keys[i]} }
-            config={ {'staticPlot': true} }
-            />
+        const xs = [2015, 2016, 2017, 2018, 2019, 2020];
+        const ladLinVals = calcLin(xs[0], r);
+        const engLinVals = calcLin(xs[0], engVals[i]);
+
+
+        const ladData = {
+            x: xs,
+            y: r,
+            type: 'scatter',
+            mode: 'lines',
+            marker: {color: 'purple'}
+        }
+
+        const engData = {
+            x: xs,
+            y: engVals[i],
+            type: 'scatter',
+            mode: 'lines',
+            marker: {color: 'blue'}
+        }
+
+        const ladLin = {
+            x: xs,
+            y: ladLinVals,
+            type: 'scatter',
+            mode: 'lines',
+            marker: {color: 'purple'},
+            line: { dash: 'dot' }
+        }
+
+        const engLin = {
+            x: xs,
+            y: calcLin(xs[0], engVals[i]),
+            type: 'scatter',
+            mode: 'lines',
+            marker: {color: 'blue'},
+            line: { dash: 'dot' }
+        }
+        
+        return <Plot
+        // THIS WORKS DONT FIX IT
+        data={[ladData, engData, ladLin, engLin]}
+        layout={ {title: Keys[i]} }
+        config={ {'staticPlot': true} }
+        />
     });
 }
