@@ -19,6 +19,7 @@ const config: Config = {
         'dark-grey' : '#A5ABAF',
         'light-grey' : '#C9C5CB',
         'lilac' : '#AD77C9',
+        'blackened' : '#DDDBD9',
       }
     },
   },
