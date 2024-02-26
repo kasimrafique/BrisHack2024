@@ -9,6 +9,7 @@
 import fetch from 'node-fetch';
 
 const mapsApiKey = process.env.NEXT_PUBLIC_MAPS_API_KEY; //parthivs key
+const environApiKey = process.env.NEXT_PUBLIC_ENVIRON_API_KEY; //parthivs key
 
 async function getTextSearchResponse(query,postcode,radiusVal) {
     let highLowPair = await getHighLowPair(postcode,radiusVal);
@@ -39,19 +40,47 @@ async function getTextSearchResponse(query,postcode,radiusVal) {
 }
 
 async function getAirQualityIndex(postcode){
-    const latLongPair = getLatLongFromPostcode(postcode);
-    const res = await fetch(`https://airquality.googleapis.com/v1/currentConditions:lookup?${mapsApiKey}`,{
+    const latLongPair = await getLatLongFromPostcode(postcode);
+    const res = await fetch(`https://airquality.googleapis.com/v1/currentConditions:lookup?key=${environApiKey}`,{
         method: 'POST',
         body: JSON.stringify({
             location:{
                 latitude: latLongPair["latitude"],
                 longitude: latLongPair["longitude"]
-            }
+            },
+            extraComputations:["LOCAL_AQI"],
         })
     });
     const data = await res.json();
-
+    console.log(data);
+} 
+/* SAMPLE RESPONSE FOR AIR QUALITY INDEX DATA
+{
+  dateTime: '2024-02-26T01:00:00Z',
+  regionCode: 'gb',
+  indexes: [
+    {
+      code: 'uaqi',
+      displayName: 'Universal AQI',
+      aqi: 74,
+      aqiDisplay: '74',
+      color: [Object],
+      category: 'Good air quality',
+      dominantPollutant: 'o3'
+    },
+    {
+      code: 'gbr_defra',
+      displayName: 'DAQI (UK)',
+      aqi: 2,
+      aqiDisplay: '2',
+      color: [Object],
+      category: 'Low air pollution',
+      dominantPollutant: 'o3'
+    }
+  ]
 }
+
+*/
 
 async function fetchNames(query,postcode,radius){ 
     //imagine you are in google maps, 'query' is what you would type into the search bar
@@ -113,4 +142,5 @@ function convertDistanceToCoordChange(radiusInKm){
         longDeviance : 1/(111.320*Math.cos(degreesToRadians(latDeviance)))
     }
 }
-printNames(await fetchNames("gym", "BS14HJ", 5000));
+//printNames(await fetchNames("gym", "BS14HJ", 5000));
+getAirQualityIndex("BS14HJ");
