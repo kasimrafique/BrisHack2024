@@ -20,12 +20,16 @@ export default function Home() {
             </div>
 
 
-            <div className="flex justify-center">
+            <div className="flex justify-center grid-cols-3 mr-5">
                 <div className="flex pl-2 pr-1 pt-8 pb-5 justify-left text-xl text-dark-green mx-4 my-2"> Enter your postcode here:</div>
                 <form action={dispatch}>
+                    <div className="flex items-center">
                     <div className="mt-5">
                     <input type="text" name="postcode" className="mx-8 my-2 p-[5%] text-black rounded-[7px] border border-dark-green" placeholder="  Enter postcode" />
-                    <button type="submit" className="text-black"><ArrowRightCircleIcon className="h-10 w-10 text-dark-green" /></button>
+                    </div>
+                    <div>
+                        <button type="submit" className="text-black justify-center mt-6"><ArrowRightCircleIcon className="h-10 w-10 text-dark-green hover:text-green-800" /></button>
+                    </div>
                     </div>
                 </form>
                 {
