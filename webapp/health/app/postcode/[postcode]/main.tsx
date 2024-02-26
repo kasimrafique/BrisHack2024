@@ -8,6 +8,7 @@ import { yearlyLADValues } from "../../lib/graphs";
 import Input from "./input";
 import Dial from "../../ui/score"   
 import { getLAD } from "@/app/lib/postcodeClient";
+import { actually_transpose } from "@/app/lib/utils";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -15,7 +16,7 @@ export async function Main({ postcode }: { postcode: string }) {
     const lad = await getLAD(postcode.trim().replace(/\s/g, "").toUpperCase());
     const scores = get_scores_array(await getScores(lad));
     const ladVals = await yearlyLADValues(lad);
-    const engVals = get_england_array();
+    const engVals = actually_transpose(get_england_array());
     const ladRecord = await getScoreOfYear(lad, 2020);
     console.log(ladRecord);
     const plots = ladVals && engVals && PlotLADs({ ladVals, engVals });
