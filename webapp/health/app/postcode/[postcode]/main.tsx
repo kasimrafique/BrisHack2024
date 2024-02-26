@@ -43,7 +43,7 @@ export async function Main({ postcode }: { postcode: string }) {
         <>
             <div className="bg-white text-black">
                 <div className="columns-2 bg-dark-green">
-                    <div className={`flex justify-center  text-5xl text-white pl-7 py-20 ${montserrat.className}`}>
+                    <div className={`flex justify-center  text-5xl text-white pl-12 bottom-2 py-20 ${montserrat.className}`}>
                         <p>How Healthy is your Postcode?</p>
                     </div>
                     <div className={`justify-center text-3xl text-white py-20 ${montserrat.className}`}>
