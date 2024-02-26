@@ -67,7 +67,7 @@ export async function getScoreOfYear(lad: string, year: number): Promise<Score |
             break;
         }
     }
-    
+
 
     for (const key_eng in standard_deviations) {
         console.log(key_eng);
@@ -90,9 +90,9 @@ export async function getScoreOfYear(lad: string, year: number): Promise<Score |
         // @ts-ignore
         const z = (data[key] - england[key]) / sd[key];
         if (key in ["life_satisfaction", "healthy_eating", "physical_activity", "green_space"]) {
-            score += z;
-        } else {
             score -= z;
+        } else {
+            score += z;
         }
 
         scores[key] = +(score.toFixed(1));

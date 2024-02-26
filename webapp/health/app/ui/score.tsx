@@ -59,3 +59,23 @@ function Dial({ score, color, finalScore, size }: { score: SpringValue<number>, 
     );
 }
 
+export function DialSkeleton({ size }: { size: number }) {
+    return (
+        <div className="relative group" style={{
+            width: `${size}rem`,
+            height: `${size}rem`
+        }}>
+            <div className="absolute rounded-full overflow-hidden bg-gray-500" style={{
+                width: `${size}rem`,
+                height: `${size}rem`
+            }}>
+                <div className="absolute top-0 left-0 w-full h-full bg-gray-400 z-20" style={{ clipPath: "polygon(0% 100%, 50% 50%, 100% 100%)" }} />
+                <div className="align-middle absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-5/6 h-5/6 bg-blackened z-30 rounded-full" >
+                    <div className="flex items-center justify-center w-full h-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
