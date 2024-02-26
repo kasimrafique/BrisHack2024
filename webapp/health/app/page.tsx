@@ -17,8 +17,6 @@ import dynamic from "next/dynamic";
 import Score from "./ui/score";
 
 export default function Home() {
-    calcLin(10, [1,2,3,4,5,6]);
-
     const [postcode, setPostcode] = useState("");
     const [ladVals, setLadVals] = useState<(number | null)[][]>();
     const [engVals, setEngVals] = useState<(number | null)[][]>();

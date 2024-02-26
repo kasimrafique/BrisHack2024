@@ -49,14 +49,14 @@ export function calcLin(start : number, vals_n : (number | null)[]) {
     console.log(vals)
   
     const initVal = 0;
-    const n = 6;
+    const n = start + 6;
     // 0 + ... + 5
-    const nSum = 15; 
+    const nSum = (n - start) * (1/2) * (start + start + 5); 
     const sum = vals.reduce((total, val) => total + val, initVal); 
     const squareSum = vals.reduce((total, val) => {
       // console.log(`${val} * ${val}`)
       return total + (val * val)}, initVal); 
-    let i = 0;
+    let i = start;
     const productSum = vals.reduce((total, val) => { 
       i++;
       // console.log(`Total: ${total}`)
@@ -73,11 +73,11 @@ export function calcLin(start : number, vals_n : (number | null)[]) {
 
   
     const ys = [];
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < 6; i++) {
       // y_i = mx_i + c
       ys.push(i * gradient + intercept);
     }
-    console.log(`${ys}`)
+    console.log(`[${ys}]`)
 
     return ys;
   }

@@ -131,3 +131,47 @@ export async function getScores(lad : string){
     }
     return scores;
 }
+
+export async function get_scores_array(lad : string) {
+    const x : {
+        2015 : Score | null,
+        2016 : Score | null,
+        2017 : Score | null,
+        2018 : Score | null,
+        2019 : Score | null,
+        2020 : Score | null,
+    } = await getScores(lad)
+    let result : number[][] = [];
+    for (const key_t in Object.keys(x)) {
+        const key = parseInt(key_t) as keyof typeof x;
+        if (!x[key]) {
+            return null;
+        }
+        const res = get_inner_array(x[key])
+        if (!res) {
+            return null;
+        }
+
+        result.push(res);
+    }
+
+    return result;
+}
+
+export function get_inner_array(x : Score | null) {
+    if (!x) {
+        return null;
+    }
+
+    let result : number[] = [];
+    for (const key_t in Object.keys(x)) {
+        const key = key_t as keyof Score;
+        if (!x[key]) {
+            return null;
+        }
+
+        result.push(x[key]!);
+    }
+
+    return result;
+}

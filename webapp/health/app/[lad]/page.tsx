@@ -1,9 +1,9 @@
 import { Suspense } from "react";
-import { Score, getScores } from "../lib/score";
+import { Score, getScores, get_scores_array } from "../lib/score";
 import { Montserrat } from "next/font/google";
 const montserrat = Montserrat({ subsets: ["latin"] });
 import { calcLin } from "../lib/math";
-import { get_england_array, england_data } from "../lib/default-data";
+import { get_england_array } from "../lib/default-data";
 
 import { useState } from "react";
 import { Keys } from "../lib/default-data";
@@ -21,12 +21,12 @@ export default function Page({ params }: { params: { lad: string } }) {
 
 async function Score1({ lad }: { lad: string }) {
 
-    calcLin(10, [1,2,3,4,5,6]);
-
-    const scores = await getScores(lad);
+    const scores = await get_scores_array(lad);
     const ladVals = await yearlyLADValues(lad);
     const engVals = get_england_array();
-    const plots = ladVals && engVals && PlotGraphs({ladVals, engVals});
+    const plots = ladVals && engVals && PlotLADs({ladVals, engVals});
+    const scorePlots = scores && PlotScores({scores});
+
 
     return (
         <div>   
@@ -116,7 +116,7 @@ async function Score1({ lad }: { lad: string }) {
     );
 }
 
-function PlotGraphs({ ladVals, engVals  } : { ladVals : (number | null)[][], engVals : (number | null)[][]}) {
+function PlotLADs({ ladVals, engVals  } : { ladVals : (number | null)[][], engVals : (number | null)[][]}) {
     return ladVals?.map((r, i) => {
         const xs = [2015, 2016, 2017, 2018, 2019, 2020];
         const ladLinVals = calcLin(xs[0], r);
@@ -159,6 +159,37 @@ function PlotGraphs({ ladVals, engVals  } : { ladVals : (number | null)[][], eng
         return <Plot
         // THIS WORKS DONT FIX IT
         data={[ladData, engData, ladLin, engLin]}
+        layout={ {title: Keys[i]} }
+        config={ {'staticPlot': true} }
+        />
+    });
+}
+
+function PlotScores({ scores  } : { scores : (number | null)[][] }) {
+    return scores?.map((r, i) => {
+        const xs = [2015, 2016, 2017, 2018, 2019, 2020];
+        const scoresLinVals = calcLin(xs[0], r);
+
+        const scoresData = {
+            x: xs,
+            y: scores,
+            type: 'scatter',
+            mode: 'lines',
+            marker: {color: 'purple'},
+        }
+
+        const scoresLin = {
+            x: xs,
+            y: scoresLinVals,
+            type: 'scatter',
+            mode: 'lines',
+            marker: {color: 'blue'},
+            line: { dash: 'dot' }
+        }
+        
+        return <Plot
+        // THIS WORKS DONT FIX IT
+        data={[scoresData, scoresLin]}
         layout={ {title: Keys[i]} }
         config={ {'staticPlot': true} }
         />
