@@ -8,44 +8,8 @@ import { getPostcode } from "./lib/actions";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export default function Home() {
-<<<<<<< Updated upstream
-    const [postcode, setPostcode] = useState("");
-    const [ladVals, setLadVals] = useState<(number | null)[][]>();
-    const [engVals, setEngVals] = useState<(number | null)[][]>();
-
-
-    const action = async (x : FormData) => {
-        const postcode = x.get("postcode");
-        if (typeof postcode === "string") {
-            const lad = await getLAD(postcode);
-            setLadVals(await yearlyLADValues(lad));
-            setEngVals(await yearlyEngValues());
-         
-        }
-    }
-    
-||||||| ancestor
-    calcLin(10, [1,2,3,4,5,6]);
-
-    const [postcode, setPostcode] = useState("");
-    const [ladVals, setLadVals] = useState<(number | null)[][]>();
-    const [engVals, setEngVals] = useState<(number | null)[][]>();
-
-
-    const action = async (x : FormData) => {
-        const postcode = x.get("postcode");
-        if (typeof postcode === "string") {
-            const lad = await getLAD(postcode);
-            setLadVals(await yearlyLADValues(lad));
-            setEngVals(await yearlyEngValues());
-         
-        }
-    }
-    
-=======
     const [state, dispatch] = useFormState(getPostcode, {});
 
->>>>>>> Stashed changes
     return (
         <div className="bg-white fill-slate-400">
             <div className={`flex justify-center bg-dark-green text-5xl text-white py-20 ${montserrat.className}`}>
