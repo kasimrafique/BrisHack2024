@@ -36,15 +36,15 @@ export async function Main({ postcode }: { postcode: string }) {
 
                 <div className="flex space-x-5">
                     <div className = "pt-10 pl-10 pr-10">
-                        <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Overall Score</i>
+                        <i className={`flex justify-left text-4xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Overall Score</i>
                     </div>
                     <div className={`col-span-1 flex justify-left text-xl font-semi-bold text-dark-green ml-10 pl-30 pr-30 pt-14  ${montserrat.className}`}>
                         {ladRecord && ladRecord.final_score && <Dial score={ladRecord.final_score} size={15} />}
                     </div>
                     <div className = "pl-10 pr-10 pt-10">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}> What this score means:</i>
-                        <p> This score is calculated based on numerous catergories that affect your health as summarised below. Your area has scored a 
-                         {ladRecord && ladRecord.final_score}/10. The average got England is a five out of ten so above five means your area
+                        <p> This score is calculated based on numerous catergories that affect your health as summarised below. Your area has scored a {ladRecord && ladRecord.final_score}/10. 
+                        The average for England is a five out of ten so above five means your area
                         is above average and below five means your area is below average.
                          </p>
                     </div>
@@ -153,7 +153,8 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Physical Activity</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>Add here</li>
+                            <li>Based on the 2020 data from the public health data collection Fingertips for the respondents aged 19 and over in {lad} 
+                                of their physical activity per week, we have calculated your area as {ladRecord && ladRecord.physical_activity}/10 for physical activity. </li>
                             <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
                         </ul>
                        
