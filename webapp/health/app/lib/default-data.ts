@@ -1,4 +1,4 @@
-export const england_2020 = {
+const england_2020 = {
     "life_satisfaction": 86.9,
     "healthy_eating": 97.3,
     "physical_activity": 100.5,
@@ -11,7 +11,7 @@ export const england_2020 = {
     "road_safety": 102.8
 }
 
-export const england_2019 = {
+const england_2019 = {
     "area_type": "Country",
     "life_satisfaction": 100.7,
     "healthy_eating": 95.6,
@@ -25,7 +25,7 @@ export const england_2019 = {
     "road_safety": 101.1
 }
 
-export const england_2018 = {
+const england_2018 = {
     "area_type": "Country",
     "life_satisfaction": 103.5,
     "healthy_eating": 96.1,
@@ -39,7 +39,7 @@ export const england_2018 = {
     "road_safety": 100.8
 }
 
-export const england_2017 = {
+const england_2017 = {
     "area_type": "Country",
     "life_satisfaction": 102,
     "healthy_eating": 101.2,
@@ -53,7 +53,7 @@ export const england_2017 = {
     "road_safety": 100.4
 }
 
-export const england_2016 = {
+const england_2016 = {
     "area_type": "Country",
     "life_satisfaction": 101.7,
     "healthy_eating": 100,
@@ -67,7 +67,7 @@ export const england_2016 = {
     "road_safety": 100.1
 }
 
-export const england_2015 = {
+const england_2015 = {
     "area_type": "Country",
     "life_satisfaction": 100,
     "healthy_eating": 100,
@@ -81,6 +81,15 @@ export const england_2015 = {
     "road_safety": 100
 }
 
+export const england_data = {
+    2015 : england_2015, 
+    2016 : england_2016,
+    2017 : england_2017,
+    2018 : england_2018,
+    2019 : england_2019,
+    2020 : england_2020
+}
+
 export const Keys: string[] = [
     "Life Satisfaction",
     "Healthy Eating",
@@ -91,8 +100,8 @@ export const Keys: string[] = [
     "Road Safety"
 ]
 
-export const standard_deviations = [
-    {
+export const standard_deviations = {
+    2015 : {
         "year": 2015,
         "life_satisfaction": 10.3106,
         "healthy_eating": 9.8802,
@@ -105,7 +114,7 @@ export const standard_deviations = [
         "noise_complaints": 9.1127,
         "road_safety": 9.4775
     },
-    {
+    2016 : {
         "year": 2016,
         "life_satisfaction": 9.7558,
         "healthy_eating": 9.8804,
@@ -118,7 +127,7 @@ export const standard_deviations = [
         "noise_complaints": 9.0471,
         "road_safety": 9.4892
     },
-    {
+    2017 : {
         "year": 2017,
         "life_satisfaction": 9.8004,
         "healthy_eating": 9.7739,
@@ -131,7 +140,7 @@ export const standard_deviations = [
         "noise_complaints": 9.1724,
         "road_safety": 9.7175
     },
-    {
+    2018 : {
         "year": 2018,
         "life_satisfaction": 10.1304,
         "healthy_eating": 10.4171,
@@ -144,7 +153,7 @@ export const standard_deviations = [
         "noise_complaints": 9.4793,
         "road_safety": 9.759
     },
-    {
+    2019 : {
         "year": 2019,
         "life_satisfaction": 9.8352,
         "healthy_eating": 10.8037,
@@ -157,7 +166,7 @@ export const standard_deviations = [
         "noise_complaints": 9.7657,
         "road_safety": 9.8417
     },
-    {
+    2020 : {
         "year": 2020,
         "life_satisfaction": 11.5855,
         "healthy_eating": 10.1449,
@@ -170,4 +179,4 @@ export const standard_deviations = [
         "noise_complaints": 9.7658,
         "road_safety": 9.8203
     }
-]
+}
