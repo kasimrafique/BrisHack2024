@@ -1,10 +1,10 @@
 "use server";
 
-import { createClient } from "./server-client";
+import { createClient as createServerClient } from "./server-client";
+import { createClient } from "./client";
 
-
-export async function getLAD(postcode: string) {
-    const supabase = createClient();
+export async function getLAD(postcode: string, clientSide: boolean = false) {
+    const supabase = clientSide ? createClient() : createServerClient();
 
     const { data, error } = await supabase
         .from("postcodes")
