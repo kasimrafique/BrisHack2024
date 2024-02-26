@@ -67,7 +67,7 @@ export async function getScoreOfYear(lad: string, year: number): Promise<Score |
             break;
         }
     }
-    
+
 
     for (const key_eng in standard_deviations) {
         console.log(key_eng);
@@ -94,7 +94,7 @@ export async function getScoreOfYear(lad: string, year: number): Promise<Score |
         } else {
             score += z;
         }
-        
+
         score *= 10 / 6;
         if (score < 0) {
             score = 0;
