@@ -37,15 +37,15 @@ export async function Main({ postcode }: { postcode: string }) {
 
                 <div className="flex space-x-5">
                     <div className = "pt-10 pl-10 pr-10">
-                        <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Overall Score</i>
+                        <i className={`flex justify-left text-4xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Overall Score</i>
                     </div>
                     <div className={`col-span-1 flex justify-left text-xl font-semi-bold text-dark-green ml-10 pl-30 pr-30 pt-14  ${montserrat.className}`}>
                         {ladRecord && ladRecord.final_score && <Dial score={ladRecord.final_score} size={15} />}
                     </div>
                     <div className="pl-10 pr-10 pt-10">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}> What this score means:</i>
-                        <p> This score is calculated based on numerous catergories that affect your health as summarised below. Your area has scored a 
-                         {ladRecord && ladRecord.final_score}/10. The average got England is a five out of ten so above five means your area
+                        <p> This score is calculated based on numerous catergories that affect your health as summarised below. Your area has scored a {ladRecord && ladRecord.final_score}/10.
+                         The average for England is a five out of ten so above five means your area
                         is above average and below five means your area is below average.
                          </p>
                     </div>
