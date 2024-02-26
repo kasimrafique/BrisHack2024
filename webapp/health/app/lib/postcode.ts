@@ -5,12 +5,11 @@ import { createClient } from "./server-client";
 
 export async function getLAD(postcode: string) {
     const supabase = createClient();
-    const start = postcode.trim().replace(/\s/g, "").toUpperCase();
 
     const { data, error } = await supabase
         .from("postcodes")
         .select("LAD")
-        .eq("postcode", start)
+        .eq("postcode", postcode)
 
     if (error !== null) {
         console.log(error);
@@ -19,7 +18,7 @@ export async function getLAD(postcode: string) {
     }
 
     if (data.length === 0) {
-        return getNearestLAD(start);
+        return getNearestLAD(postcode);
     }
 
     return data[0].LAD;
