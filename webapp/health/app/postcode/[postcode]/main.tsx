@@ -10,6 +10,7 @@ import Dial from "../../ui/score"
 import { getLAD } from "@/app/lib/postcodeClient";
 import { actually_transpose } from "@/app/lib/utils";
 import Location from "@/app/ui/api";
+import { getPlaceName } from "@/app/lib/getPlace";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -38,6 +39,7 @@ export async function Main({ postcode }: { postcode: string }) {
     console.log(ladRecord);
     const plots = ladVals && engVals && PlotLADs({ ladVals, engVals });
     const scorePlots = scores && PlotScores({ scores });
+    const placeName = await getPlaceName(lad);
 
     return (
         <>
@@ -76,7 +78,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Life Satisfaction</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>The life satisfaction rating for {lad} is {ladRecord && ladRecord.life_satisfaction}/10 based on data from an Annual Population
+                            <li>The life satisfaction rating for {placeName} is {ladRecord && ladRecord.life_satisfaction}/10 based on data from an Annual Population
                                 Survey in 2020.</li>
                             <li>This is {ladRecord && ladRecord.life_satisfaction && getCommentFromScore(ladRecord.life_satisfaction)} compared to the rest of England. </li>
                         </ul>
@@ -96,7 +98,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Healthy Eating</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>Based on the 2020 data from the public health data collection Fingertips for the percentage of adults in {lad}
+                            <li>Based on the 2020 data from the public health data collection Fingertips for the percentage of adults in {placeName} 
                                 classified as overweight, we have calculated your area as {ladRecord && ladRecord.healthy_eating}/10 for healthy eating.</li>
                             <li>This is {ladRecord && ladRecord.healthy_eating && getCommentFromScore(ladRecord.healthy_eating)} compared to the rest of England. </li>
                         </ul>
@@ -114,7 +116,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Air Pollution</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>The air pollution rating for {lad} is {ladRecord && ladRecord.air_pollution}/10 based Defra’s recordings of annual mean PM2.5 in µg m-3
+                            <li>The air pollution rating for {placeName} is {ladRecord && ladRecord.air_pollution}/10 based Defra’s recordings of annual mean PM2.5 in µg m-3
                                 weighted by the population.</li>
                             <li>This is {ladRecord && ladRecord.air_pollution && getCommentFromScore(ladRecord.air_pollution)} compared to the rest of England. </li>
                         </ul>
@@ -133,7 +135,7 @@ export async function Main({ postcode }: { postcode: string }) {
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Noise Complaints</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>Based on the 2020 data from the public health data collection Fingertips for the rate of noise complaints in
-                                {lad}, we have calculated your area as {ladRecord && ladRecord.noise_complaints}/10 for noise complaints.</li>
+                            {placeName}, we have calculated your area as {ladRecord && ladRecord.noise_complaints}/10 for noise complaints.</li>
                             <li>This is {ladRecord && ladRecord.noise_complaints && getCommentFromScore(ladRecord.noise_complaints)} compared to the rest of England. </li>
                         </ul>
 
@@ -152,7 +154,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Green Space</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>The green space rating is {ladRecord && ladRecord.green_space}/10 based on the number of addresses in {lad} with private outdoor space.
+                            <li>The green space rating is {ladRecord && ladRecord.green_space}/10 based on the number of addresses in {placeName} with private outdoor space.
                                 This data is from the Office of National Statistics and Ordnance Survey data.</li>
                             <li>This is {ladRecord && ladRecord.green_space && getCommentFromScore(ladRecord.green_space)} compared to the rest of England. </li>
                         </ul>
@@ -170,7 +172,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Physical Activity</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>Based on the 2020 data from the public health data collection Fingertips for the respondents aged 19 and over in {lad} 
+                            <li>Based on the 2020 data from the public health data collection Fingertips for the respondents aged 19 and over in {placeName} 
                                 of their physical activity per week, we have calculated your area as {ladRecord && ladRecord.physical_activity}/10 for physical activity. </li>
                             <li>This is {ladRecord && ladRecord.physical_activity && getCommentFromScore(ladRecord.physical_activity)} compared to the rest of England. </li>
                         </ul>
@@ -188,7 +190,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Road Safety</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>The road safety rating for {lad} is {ladRecord && ladRecord.road_safety}/10 based on the gov.uk Department for Transport records.</li>
+                            <li>The road safety rating for {placeName} is {ladRecord && ladRecord.road_safety}/10 based on the gov.uk Department for Transport records.</li>
                             <li>This is {ladRecord && ladRecord.road_safety && getCommentFromScore(ladRecord.road_safety)} compared to the rest of England. </li>
                         </ul>
 
