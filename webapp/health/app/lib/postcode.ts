@@ -14,15 +14,9 @@ export async function getLAD(postcode: string, supabase: SupabaseClient) {
         return null;
     }
 
-    console.log("hello");
-    console.log(data);
-    console.log(data.length);
-
     if (data.length === 0) {
         return getNearestLAD(postcode, supabase);
     }
-
-    console.log(data[0]);
     return data[0].LAD;
 
 }

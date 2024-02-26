@@ -95,14 +95,14 @@ export async function getScoreOfYear(lad: string, year: number): Promise<Score |
             score -= z;
         }
 
-        scores[key] = score;
+        scores[key] = +(score.toFixed(1));
         final_score += score;
         n += 1;
     }
 
     // @ts-ignore
     if (n !== 0) {
-        scores["final_score"] = (final_score / n) * (10 / 8);
+        scores["final_score"] = +(((final_score / n) * (10 / 8)).toFixed(1));
     }
 
     console.log(scores);
