@@ -9,7 +9,7 @@ import Input from "./input";
 import Dial from "../../ui/score"
 import { getLAD } from "@/app/lib/postcodeClient";
 import { actually_transpose } from "@/app/lib/utils";
-import Location from "@/app/ui/api";
+import Location from "@/app/ui/location";
 import { getPlaceName } from "@/app/lib/getPlace";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
