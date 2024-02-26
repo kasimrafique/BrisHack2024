@@ -6,9 +6,10 @@ import { Keys } from "../../lib/default-data";
 import { Plot } from "./plot";
 import { yearlyLADValues } from "../../lib/graphs";
 import Input from "./input";
-import Dial from "../../ui/score"   
+import Dial from "../../ui/score"
 import { getLAD } from "@/app/lib/postcodeClient";
 import { actually_transpose } from "@/app/lib/utils";
+import Location from "@/app/ui/api";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -30,23 +31,23 @@ export async function Main({ postcode }: { postcode: string }) {
                         <p>How Healthy is your Postcode?</p>
                     </div>
                     <div className={`flex justify-center text-3xl text-white py-20 ${montserrat.className}`}>
-                        <Input />                        
+                        <Input />
                     </div>
                 </div>
 
                 <div className="flex space-x-5">
-                    <div className = "pt-10 pl-10 pr-10">
+                    <div className="pt-10 pl-10 pr-10">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Overall Score</i>
                     </div>
                     <div className={`col-span-1 flex justify-left text-xl font-semi-bold text-dark-green ml-10 pl-30 pr-30 pt-14  ${montserrat.className}`}>
                         {ladRecord && ladRecord.final_score && <Dial score={ladRecord.final_score} size={15} />}
                     </div>
-                    <div className = "pl-10 pr-10 pt-10">
+                    <div className="pl-10 pr-10 pt-10">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}> What this score means:</i>
-                        <p> This score is calculated based on numerous catergories that affect your health as summarised below. Your area has scored a 
-                         {ladRecord && ladRecord.final_score}/10. The average got England is a five out of ten so above five means your area
-                        is above average and below five means your area is below average.
-                         </p>
+                        <p> This score is calculated based on numerous catergories that affect your health as summarised below. Your area has scored a
+                            {ladRecord && ladRecord.final_score}/10. The average got England is a five out of ten so above five means your area
+                            is above average and below five means your area is below average.
+                        </p>
                     </div>
 
                 </div>
@@ -60,10 +61,10 @@ export async function Main({ postcode }: { postcode: string }) {
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Life Satisfaction</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>The life satisfaction rating for {lad} is {ladRecord && ladRecord.life_satisfaction}/10 based on data from an Annual Population
-                         Survey in 2020.</li>
+                                Survey in 2020.</li>
                             <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
                         </ul>
-                       
+
                     </div>
                     <div className="pt-7 pr-10">
                         <div className="border border-black ">{plots && plots[0]}</div>
@@ -71,7 +72,7 @@ export async function Main({ postcode }: { postcode: string }) {
                 </div>
 
 
-                
+
                 <div className="flex space-x-5" >
                     <div className={`col-span-1 flex justify-left text-xl font-semi-bold text-dark-green ml-10 pt-14  ${montserrat.className}`}>
                         {ladRecord && ladRecord.healthy_eating && <Dial score={ladRecord.healthy_eating} size={9} />}
@@ -80,10 +81,10 @@ export async function Main({ postcode }: { postcode: string }) {
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Healthy Eating</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>Based on the 2020 data from the public health data collection Fingertips for the percentage of adults in {lad}
-                             classified as overweight, we have calculated your area as {ladRecord && ladRecord.healthy_eating}/10 for healthy eating.</li>
+                                classified as overweight, we have calculated your area as {ladRecord && ladRecord.healthy_eating}/10 for healthy eating.</li>
                             <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
                         </ul>
-                       
+
                     </div>
                     <div className="pt-7 pr-10">
                         <div className="border border-black ">{plots && plots[1]}</div>
@@ -98,10 +99,10 @@ export async function Main({ postcode }: { postcode: string }) {
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Air Pollution</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>The air pollution rating for {lad} is {ladRecord && ladRecord.air_pollution}/10 based Defra’s recordings of annual mean PM2.5 in µg m-3
-                            weighted by the population.</li>
+                                weighted by the population.</li>
                             <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
                         </ul>
-                       
+
                     </div>
                     <div className="pt-7 pr-10">
                         <div className="border border-black ">{plots && plots[4]}</div>
@@ -116,10 +117,10 @@ export async function Main({ postcode }: { postcode: string }) {
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Noise Complaints</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>Based on the 2020 data from the public health data collection Fingertips for the rate of noise complaints in
-                     {lad}, we have calculated your area as {ladRecord && ladRecord.noise_complaints}/10 for noise complaints.</li>
+                                {lad}, we have calculated your area as {ladRecord && ladRecord.noise_complaints}/10 for noise complaints.</li>
                             <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
                         </ul>
-                       
+
                     </div>
                     <div className="pt-7 pr-10">
                         <div className="border border-black ">{plots && plots[5]}</div>
@@ -127,7 +128,7 @@ export async function Main({ postcode }: { postcode: string }) {
                 </div>
 
 
-                
+
                 <div className="flex space-x-5" >
                     <div className={`col-span-1 flex justify-left text-xl font-semi-bold text-dark-green ml-10 pt-14  ${montserrat.className}`}>
                         {ladRecord && ladRecord.green_space && <Dial score={ladRecord.green_space} size={9} />}
@@ -136,10 +137,10 @@ export async function Main({ postcode }: { postcode: string }) {
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Green Space</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>The green space rating is {ladRecord && ladRecord.green_space}/10 based on the number of addresses in {lad} with private outdoor space.
-                    This data is from the Office of National Statistics and Ordnance Survey data.</li>
+                                This data is from the Office of National Statistics and Ordnance Survey data.</li>
                             <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
                         </ul>
-                       
+
                     </div>
                     <div className="pt-7 pr-10">
                         <div className="border border-black ">{plots && plots[3]}</div>
@@ -156,7 +157,7 @@ export async function Main({ postcode }: { postcode: string }) {
                             <li>Add here</li>
                             <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
                         </ul>
-                       
+
                     </div>
                     <div className="pt-7 pr-10">
                         <div className="border border-black ">{plots && plots[2]}</div>
@@ -173,7 +174,7 @@ export async function Main({ postcode }: { postcode: string }) {
                             <li>The road safety rating for {lad} is {ladRecord && ladRecord.road_safety}/10 based on the gov.uk Department for Transport records.</li>
                             <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
                         </ul>
-                       
+
                     </div>
                     <div className="pt-7 pr-10">
                         <div className="border border-black ">{plots && plots[6]}</div>
@@ -183,54 +184,53 @@ export async function Main({ postcode }: { postcode: string }) {
 
                 <div className="flex space-x-5" >
                     <div className={`col-span-1 flex justify-left text-xl font-semi-bold text-dark-green ml-10 pt-14  ${montserrat.className}`}>
-                        {ladRecord && ladRecord.gp_distance&& <Dial score={ladRecord.gp_distance} size={9} />}
+                        {ladRecord && ladRecord.gp_distance && <Dial score={ladRecord.gp_distance} size={9} />}
                     </div>
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Distance to GP</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>The median km distance from your local GP practice is [distance here if Parthiv finds it] based on NHS records of
-                    addresses. This gives your area a score of {ladRecord && ladRecord.gp_distance}/10</li>
+                                addresses. This gives your area a score of {ladRecord && ladRecord.gp_distance}/10</li>
                             <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
                         </ul>
-                       
+
                     </div>
                 </div>
 
 
                 <div className="flex space-x-5" >
                     <div className={`col-span-1 flex justify-left text-xl font-semi-bold text-dark-green ml-10 pt-14  ${montserrat.className}`}>
-                        {ladRecord && ladRecord.pharmacy_distance&& <Dial score={ladRecord.pharmacy_distance} size={9} />}
+                        {ladRecord && ladRecord.pharmacy_distance && <Dial score={ladRecord.pharmacy_distance} size={9} />}
                     </div>
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Distance to Pharmacies</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>The median km distance from your local pharmacy is [distance here if Parthiv finds it] based on NHS records of
-                    addresses. This gives your area a score of {ladRecord && ladRecord.pharmacy_distance}/10</li>
+                                addresses. This gives your area a score of {ladRecord && ladRecord.pharmacy_distance}/10</li>
                             <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
                         </ul>
-                       
+
                     </div>
                 </div>
 
                 <div className="flex space-x-5" >
                     <div className={`col-span-1 flex justify-left text-xl font-semi-bold text-dark-green ml-10 pt-14  ${montserrat.className}`}>
-                        {ladRecord && ladRecord.pharmacy_distance&& <Dial score={ladRecord.pharmacy_distance} size={9} />}
+                        {ladRecord && ladRecord.pharmacy_distance && <Dial score={ladRecord.pharmacy_distance} size={9} />}
                     </div>
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Distance to Sports Facilities</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>The median km distance from your local sports fascilities is [distance here if Parthiv finds it] based on NHS records of
-                    addresses. This gives your area a score of {ladRecord && ladRecord.sport_facility_distance}/10</li>
+                                addresses. This gives your area a score of {ladRecord && ladRecord.sport_facility_distance}/10</li>
                             <li>This is [not good, below average, average, above average, very good] compared to the rest of England. </li>
                         </ul>
-                       
+
                     </div>
                 </div>
 
             </div>
-
+            <Location postcode={postcode} />
         </>
-
     );
 }
 
@@ -247,6 +247,7 @@ function PlotLADs({ ladVals, engVals }: { ladVals: (number | null)[][], engVals:
             y: r,
             type: 'scatter',
             mode: 'lines',
+            name: 'Actual value',
             marker: { color: 'purple' }
         }
 
@@ -255,6 +256,7 @@ function PlotLADs({ ladVals, engVals }: { ladVals: (number | null)[][], engVals:
             y: engVals[i],
             type: 'scatter',
             mode: 'lines',
+            name: 'England average',
             marker: { color: 'blue' }
         }
 
@@ -264,6 +266,7 @@ function PlotLADs({ ladVals, engVals }: { ladVals: (number | null)[][], engVals:
             type: 'scatter',
             mode: 'lines',
             marker: { color: 'purple' },
+            name: 'Actual trend line',
             line: { dash: 'dot' }
         }
 
@@ -273,6 +276,7 @@ function PlotLADs({ ladVals, engVals }: { ladVals: (number | null)[][], engVals:
             type: 'scatter',
             mode: 'lines',
             marker: { color: 'blue' },
+            name: 'England trend line',
             line: { dash: 'dot' }
         }
 
@@ -280,7 +284,7 @@ function PlotLADs({ ladVals, engVals }: { ladVals: (number | null)[][], engVals:
             key={i}
             // THIS WORKS DONT FIX IT
             data={[ladData, engData, ladLin, engLin]}
-            layout={{ title: Keys[i], width: 500, height: 300}}
+            layout={{ title: Keys[i], width: 500, height: 300 }}
             config={{ 'staticPlot': true }}
         />
     });

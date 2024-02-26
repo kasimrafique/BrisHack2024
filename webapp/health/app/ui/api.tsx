@@ -5,16 +5,16 @@ import { getAirQualityIndex } from "../lib/apiInteface";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 async function FacilityList({ postcode, search, title }: { postcode: string, search: string, title: string }) {
-    const gymList = await fetchNames(search, postcode, 500);
-    if (gymList == "nothing") {
-        return (<div><a>No results.</a></div>)
+    const facilities = await fetchNames(search, postcode, 500);
+    if (facilities == "nothing") {
+        return (<div>No results.</div>)
     }
 
     return (
         <div className="text-black">
-            <h1 className="text-gray-800 font-semibold">{title}</h1>
-            {gymList.map((x: any, i: number) => {
-                return <div key={i}><a href={x["websiteUri"]}>{x["displayName"]["text"]}</a></div>
+            <h1 className="text-gray-800 font-semibold text-[17px]">{title} ({facilities.length})</h1>
+            {facilities.map((x: any, i: number) => {
+                return <div key={i}><a className="text-gray-700 hover:text-gray-800 hover:underline" href={x["websiteUri"]}>{x["displayName"]["text"]}</a></div>
             })}
         </div>
     );
