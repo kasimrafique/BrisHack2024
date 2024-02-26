@@ -32,6 +32,9 @@ function getCommentFromScore(score: number){
 
 export async function Main({ postcode }: { postcode: string }) {
     const lad = await getLAD(postcode.trim().replace(/\s/g, "").toUpperCase());
+    if (!lad || typeof lad !== 'string' || lad === "") {
+        return <div className="text-red-500">Invalid postcode</div>;
+    }
     const scores = get_scores_array(await getScores(lad));
     const ladVals = await yearlyLADValues(lad);
     const engVals = actually_transpose(get_england_array());
