@@ -10,7 +10,7 @@ export default function Score({ score, size }: { score: number, size: number }) 
         },
         to: {
             score: score,
-            color: `hsl(${score * 12}, 60%, 50%)`
+            color: `hsl(${Math.round(score * 12)}, 60%, 50%)`
         },
         config: { duration: 500 }
     }), [score]);
@@ -26,7 +26,7 @@ function Dial({ score, color, finalScore, size }: { score: SpringValue<number>, 
     const xpercent = x.to(x => 50 + x * 50);
     const ypercent = y.to(y => 50 - y * 50);
 
-    const clipPath = to([xpercent, ypercent, score], (x, y, score) => `polygon(0% 100%, 50% 50%, ${x}% ${y}% ${score >= 7.5 ? `, 100% ${y}%, 100% 0%` : ''}${score >= 5 ? `, ${x}% 0%` : ''}${score >= 2.5 ? ', 0% 0%' : ''})`);
+    const clipPath = to([xpercent, ypercent, score], (x, y, score) => `polygon(0% 100%, 50% 50%, ${x}% ${y}% ${score >= 8.33 ? `, 100% ${y}%, 100% 0%` : ''}${score >= 5 ? `, ${x}% 0%` : ''}${score >= 1.67 ? ', 0% 0%' : ''})`);
 
     return (
         <>
