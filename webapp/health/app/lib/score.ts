@@ -1,6 +1,5 @@
 import { Data, createClient } from "./server-client";
-import { england_data} from "./default-data";
-import { standard_deviations } from "./default-data";
+import { england_data, standard_deviations} from "./default-data";
 
 export type Score = {
     "life_satisfaction": number | null
@@ -16,7 +15,7 @@ export type Score = {
     "final_score": number | null
 }
 
-export async function getScore(lad: string, year : number): Promise<Score | null> {
+export async function getScoreOfYear(lad: string, year : number): Promise<Score | null> {
     const supabase = createClient();
 
     const { data, error }: {
@@ -56,11 +55,21 @@ export async function getScore(lad: string, year : number): Promise<Score | null
     let n = 0;
     
     var england;
+    var sd;
 
     for (const key_eng in england_data){
         if (year.toString() === key_eng){
             const key = parseInt(key_eng) as keyof typeof england_data;
             england = england_data[key];
+            break;
+        }
+    }
+
+    for (const key_eng in standard_deviations){
+        if (year.toString() === key_eng){
+            const key = parseInt(key_eng) as keyof typeof standard_deviations;
+            sd = standard_deviations[key];
+            break;
         }
     }
 
@@ -74,7 +83,7 @@ export async function getScore(lad: string, year : number): Promise<Score | null
         }
 
         // @ts-ignore
-        const z = (data[key] - england[key]) / standard_deviations[key];
+        const z = (data[key] - england[key]) / sd[key];
         if (key in ["life_satisfaction", "healthy_eating", "physical_activity", "green_space"]) {
             score += z;
         } else {
@@ -93,5 +102,30 @@ export async function getScore(lad: string, year : number): Promise<Score | null
 
 
     // @ts-ignore
+    return scores;
+}
+
+
+export async function getScores(lad : string){
+    let scores : {
+        2015 : Score | null,
+        2016 : Score | null,
+        2017 : Score | null,
+        2018 : Score | null,
+        2019 : Score | null,
+        2020 : Score | null,
+    } = {
+        2015 : null,
+        2016 : null,
+        2017 : null,
+        2018 : null,
+        2019 : null,
+        2020 : null,
+    }
+
+    for (const keyS in scores) {
+        const key = parseInt(keyS) as keyof typeof scores;
+        scores[key] = await getScoreOfYear(lad, key);
+    }
     return scores;
 }
