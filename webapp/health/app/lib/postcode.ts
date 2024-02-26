@@ -1,5 +1,3 @@
-import { createClient as createServerClient } from "./server-client";
-import { createClient as createClientClient } from "./client";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export async function getLAD(postcode: string, supabase: SupabaseClient) {
@@ -33,7 +31,7 @@ async function getNearestLAD(postcode: string, supabase: SupabaseClient) {
         return null;
     }
 
-    if (data === null) {
+    if (data === null || data.length === 0) {
         return null;
     }
 
