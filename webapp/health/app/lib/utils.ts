@@ -20,6 +20,9 @@ export function transpose(data: GraphData[] | null) {
 }
 
 export function actually_transpose<T>(data: T[][]): T[][] {
+    if (data.length === 0) {
+        return [];
+    }
     let data_t: T[][] = [];
     for (let i = 0; i < data[0].length; i++) {
         let inner: T[] = [];

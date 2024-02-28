@@ -14,17 +14,17 @@ import { getPlaceName } from "@/app/lib/getPlace";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-function getCommentFromScore(score: number){
-    if(score<3){
+function getCommentFromScore(score: number) {
+    if (score < 3) {
         return "not good";
     }
-    else if(score<4.5){
+    else if (score < 4.5) {
         return "less than average";
     }
-    else if(score<5.5){
+    else if (score < 5.5) {
         return "average";
     }
-    else if(score<7){
+    else if (score < 7) {
         return "above average";
     }
     else return "very good";
@@ -36,6 +36,9 @@ export async function Main({ postcode }: { postcode: string }) {
         return <div className="text-red-500">Invalid postcode</div>;
     }
     const scores = get_scores_array(await getScores(lad));
+    if (!scores || scores.length === 0) {
+        return <div className="text-red-500">Invalid postcode</div>;
+    }
     const ladVals = await yearlyLADValues(lad);
     const engVals = actually_transpose(get_england_array());
     const ladRecord = await getScoreOfYear(lad, 2020);
@@ -57,7 +60,7 @@ export async function Main({ postcode }: { postcode: string }) {
                 </div>
 
                 <div className="flex space-x-5">
-                    <div className = "pt-10 pl-10 pr-10">
+                    <div className="pt-10 pl-10 pr-10">
                         <i className={`flex justify-left text-4xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Overall Score</i>
                     </div>
                     <div className={`col-span-1 flex justify-left text-xl font-semi-bold text-dark-green ml-10 pl-30 pr-30 pt-14  ${montserrat.className}`}>
@@ -66,9 +69,9 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pl-10 pr-10 pt-10">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}> What this score means:</i>
                         <p> This score is calculated based on numerous catergories that affect your health as summarised below. Your area has scored a {ladRecord && ladRecord.final_score}/10.
-                         The average for England is a five out of ten so above five means your area
-                        is above average and below five means your area is below average.
-                         </p>
+                            The average for England is a five out of ten so above five means your area
+                            is above average and below five means your area is below average.
+                        </p>
                     </div>
 
                 </div>
@@ -173,7 +176,7 @@ export async function Main({ postcode }: { postcode: string }) {
                     <div className="pt-10 pl-10 ">
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Physical Activity</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
-                            <li>Based on the 2020 data from the public health data collection Fingertips for the respondents aged 19 and over in {placeName} 
+                            <li>Based on the 2020 data from the public health data collection Fingertips for the respondents aged 19 and over in {placeName}
                                 of their physical activity per week, we have calculated your area as {ladRecord && ladRecord.physical_activity}/10 for physical activity. </li>
                             <li>This is {ladRecord && ladRecord.physical_activity && getCommentFromScore(ladRecord.physical_activity)} compared to the rest of England. </li>
                         </ul>
@@ -241,7 +244,7 @@ export async function Main({ postcode }: { postcode: string }) {
                         <i className={`flex justify-left text-2xl font-semi-bold text-dark-green pt-3 ${montserrat.className}`}>Distance to Sports Facilities</i>
                         <ul className="list-disc pl-4 pr-3 pt-3">
                             <li>The median km distance from your local sports fascilities is [distance here] based on sports facilities addresses from Active Places Power website.  This gives your area a score of {ladRecord && ladRecord.sport_facility_distance}/10</li>
-                            <li>This is {ladRecord&&ladRecord.sport_facility_distance&&getCommentFromScore(ladRecord.sport_facility_distance)} compared to the rest of England. </li>
+                            <li>This is {ladRecord && ladRecord.sport_facility_distance && getCommentFromScore(ladRecord.sport_facility_distance)} compared to the rest of England. </li>
                         </ul>
 
                     </div>
