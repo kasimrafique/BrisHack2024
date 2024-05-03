@@ -5,7 +5,7 @@
 <img src='resources/Screenshot 2024-03-28 at 00-03-18 How Healthy is your Postcode.png' height=150>
 </p>
 
-#### Our task was the create something to do with the topic of **_health_**.
+#### Our task was to create something to do with the topic of **_health_**.
 
 We decided to create a web app which weights different UK postcodes based on collected data about the surrounding area.
 This could be used by people who are moving house and comparing different places to live, or even just to see the score of your current location.
