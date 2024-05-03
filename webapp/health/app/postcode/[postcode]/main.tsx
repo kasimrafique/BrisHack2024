@@ -42,7 +42,7 @@ export async function Main({ postcode }: { postcode: string }) {
     const ladVals = await yearlyLADValues(lad);
     const engVals = actually_transpose(get_england_array());
     const ladRecord = await getScoreOfYear(lad, 2020);
-    console.log(ladRecord);
+    // console.log(ladRecord);
     const plots = ladVals && engVals && PlotLADs({ ladVals, engVals });
     const scorePlots = scores && PlotScores({ scores });
     const placeName = await getPlaceName(lad);

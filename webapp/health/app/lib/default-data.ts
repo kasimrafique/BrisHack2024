@@ -88,7 +88,7 @@ export const england_data = {
 export function get_england_array() {
     let result: (number[])[] = [];
     for (const key_t in england_data) {
-        console.log(key_t);
+        // console.log(key_t);
         const key = parseInt(key_t) as keyof typeof england_data;
         result.push(england_data[key] && get_inner_array(england_data[key]));
     }

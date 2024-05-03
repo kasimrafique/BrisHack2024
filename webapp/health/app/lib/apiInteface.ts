@@ -102,7 +102,7 @@ export async function fetchNames(query:String,postcode:String,radius:number){
 }
 
 async function printNames(data: any){
-    //console.log(data);
+    console.log(data);
     if(data=="nothing"){
         console.log("nothing");
     }
